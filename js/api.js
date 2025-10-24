@@ -1,0 +1,40 @@
+const apiService = {
+    
+    async cadastrarItem(dadosItem) {
+        const response = await fetch(`${configAPI.baseURL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dadosItem)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao cadastrar item');
+        }
+        
+        return response;
+    },
+
+    async buscarTotalItens() {
+        try {
+            const response = await fetch(`${configAPI.baseURL}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao buscar total de itens');
+            }
+
+            const data = await response.json();
+            return data.total;
+
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+};

@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
+@import url(./_header.css);
+@import url(./_cards.css);
+@import url(./_card-filter.css);
+@import url(./_card-estoque.css);
+@import url(./_modal-add-item.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #ffffff;
+  --second-color: #ECEEF2;
+  --font-body: "Arimo", sans-serif;
+}
+
+body {
+    background-color: var(--second-color);
+    font-family: var(--font-body);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    padding: 32px 20px;
+    font-family: var(--font-body);
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbraceRN</title>
+    <link rel="shortcut icon" href="./img/Container.png">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container-header">
+            <div class="container-logo">
+                <img src="./img/Container.png" alt="Logo de um coração">
+                <div class="container-title">
+                    <p class="container-header-logo-p1">Abrace um RN</p>
+                    <p class="container-header-logo-p2">Dashboard Administrativo</p>
+                </div>
+            </div>
+            <button class="container-button" type="button" id="openModal"><strong>+</strong> Adicionar item</button>
+        </div>
+    </header>
+    <main>
+        <div class="container-cards">
+            <div class="container-input container-card1">
+                <label for="">Total de Itens</label>
+                <input type="number" name="total-itens" id="totalItens" readonly value = "0">
+            </div>
+            <div class="container-input container-card2">
+                <label for="">Tipos Cadastrados</label>
+                <input type="number" name="type" id="tipoCadastrado" readonly value="0">
+            </div>
+            <div class="container-input container-card3">
+                <label for="">Categorias</label>
+                <input type="number" name="categorias" id="categorias" readonly value="0">
+            </div>
+            <div class="container-input container-card4">
+                <label for="">Itens Únicos</label>
+                <input type="number" name="itens-unicos" id="itensUnicos" readonly value="0">
+            </div>
+        </div>
+        
+        <div class="container-filter">
+            <div class="container-filter-title">
+                <p><i class="fa-solid fa-filter" style="color: #0A0A0A;"></i> Filtros e Pesquisa</p>
+            </div>
+            <div class="container-filter-select">
+                <div class="container-select">
+                    <i class="fa-solid fa-magnifying-glass" style="font-size: 14px; color: #828291; padding-left: 24px;"></i>
+                    <input type="text" class="container-filter-input" placeholder="Pesquisar itens..." id="inputPesquisa">
+                </div>
+                <div class="container-select">           
+                    <select id="selectCategoria" name="todas-categorias" class="container-option">
+                        <option value="">Todas as categorias</option>
+                        <option value="roupas">Roupas</option>
+                        <option value="acessorios">Acessórios</option>
+                        <option value="higiene">Higiene</option>
+                        <option value="alimentacao">Alimentação</option>
+                    </select>
+                </div>
+                <div class="container-select">              
+                    <select id="selectTipo" name="" class="container-option">
+                        <option value="">Todos os tipos</option>
+                        <option value="body">Body</option>
+                        <option value="macacao">Macacão</option>
+                        <option value="manta">Manta</option>
+                        <option value="fralda">Fralda de pano</option>
+                        <option value="sapato">Sapato</option>
+                    </select>
+                </div>
+                <div class="container-select">              
+                    <select id="selectTamanho" name="" class="container-option">
+                        <option value="">Todos os tamanhos</option>
+                        <option value="rn">RN</option>
+                        <option value="p">P</option>
+                        <option value="m">M</option>
+                        <option value="g">G</option>
+                    </select>
+                </div>
+            </div>
+        </div> 
+
+        <div class="card-estoque">
+            <div class="card-estoque-header">
+                <div class="card-estoque-title">
+                    <p><i class="fa-solid fa-box"></i> Itens do Estoque</p>
+                </div>
+                <p class="card-estoque-count" id="contadorItens">0 item(s) encontrado(s)</p>
+            </div>
+
+            <div class="card-estoque-body">
+                <table class="table-estoque">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Categoria</th>
+                            <th>Tamanho</th>
+                            <th>Gênero/Validade</th>
+                            <th>Quantidade</th>
+                            <th>Data de Entrada</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyEstoque">
+                        <tr>
+                            <td colspan="7" class="mensagem-lista-vazia">Carregando itens...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- ========== MODAL ========== -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Adicionar Novo Item</h2>
+            <p>Preencha as informações para adicionar um novo item ao estoque.</p>
+            
+            <form id="itemForm">
+                <!-- Categoria -->
+                <label for="categoria">Categoria</label>
+                <select id="categoria" required>
+                    <option value="">Selecione a categoria</option>
+                    <option value="roupas">Roupas</option>
+                    <option value="acessorios">Acessórios</option>
+                    <option value="higiene">Higiene</option>
+                    <option value="alimentacao">Alimentação</option>
+                </select>
+
+                <!-- Tipo -->
+                <label for="tipo">Tipo de Item</label>
+                <select id="tipo" required disabled>
+                    <option value="">Selecione o tipo de item</option>
+                </select>
+                <div class="container-qnt-size">
+                    <div class="container-qnt">
+                        <label for="quantidade">Quantidade</label>
+                        <input type="number" id="quantidade" placeholder="Ex: 10" min="1" required>
+                    </div>
+                    <!-- Tamanho -->
+                    <div id="tamanhoContainer" style="display:none;" class="container-tamanho">
+                        <label for="tamanho">Tamanho</label>
+                        <select id="tamanho">
+                            <option value="">Selecione o tamanho</option>
+                            <option value="rn">RN</option>
+                            <option value="p">P</option>
+                            <option value="m">M</option>
+                            <option value="g">G</option>
+                            <option value="0-3m">0-3M</option>
+                            <option value="3-6m">3-6M</option>
+                            <option value="6-9m">6-9M</option>
+                            <option value="9-12m">9-12M</option>
+                            <option value="12-18m">12-18M</option>
+                            <option value="18-24m">18-24M</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Validade -->
+                <div id="validadeContainer" style="flex: 1; display: none;" class="container-data">
+                    <label for="validade">Data de Validade</label>
+                    <input type="date" id="validade">
+                </div>
+                    <!-- Gênero -->
+                <div id="generoContainer" style="display:none;" class="container-genero">
+                    <div>
+                        <label for="genero">Gênero</label>
+                        <select id="genero">
+                            <option value="">Selecione o gênero</option>
+                            <option value="masculino">M</option>
+                            <option value="feminino">F</option>
+                            <option value="unissex">Unissex</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Botões -->
+                <div class="buttons">
+                    <button type="button" id="closeModal" class="cancelar">Cancelar</button>
+                    <button type="submit" class="adicionar">Adicionar Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/card.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/modalAddItem.js"></script>
+</body>
+</html>

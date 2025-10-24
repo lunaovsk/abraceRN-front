@@ -1,0 +1,49 @@
+.container-cards {
+    display: flex;
+    justify-content: space-between;
+    height: 138px;
+    border: none;
+    gap: 16px;
+    flex-wrap: nowrap;
+    & label {
+        color: #ffffff;
+        font-size: 14px;
+    }
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.container-card1, .container-card2, .container-card3, .container-card4{
+    padding: 24px 0 0 24px;
+    width: 100%;
+    border-radius: 14px;
+    min-width: 0;
+    flex: 1;
+}
+
+.container-card1 {
+    background: linear-gradient(to right, #2B7FFF, #155DFC)
+}
+.container-card2 {
+    background: linear-gradient(to right, #AD46FF, #9810FA)
+}
+.container-card3 {
+    background: linear-gradient(to right, #F6339A, #E60076)
+}
+.container-card4 {
+    background: linear-gradient(to right, #615FFF, #4F39F6)
+}
+
+.container-input {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+    width: 100%;
+    height: 100%;
+}

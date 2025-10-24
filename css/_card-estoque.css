@@ -1,0 +1,83 @@
+
+.card-estoque {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 32px;
+    height: auto;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    opacity: 0.7;
+}
+.card-estoque-header {
+    padding: 24px 0 30px 24px;
+    font-size: 16px;
+    font-family: var(--font-body);
+    color: #0A0A0A;
+}
+
+.card-estoque-body {
+    padding: 0px 0 30px 24px;
+    font-size: 16px;
+    font-family: var(--font-body);
+    color: #0A0A0A;
+}
+
+/* ===== Estilo da Tabela de Estoque ===== */
+.table-estoque {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  color: #1f2937; /* text-foreground */
+}
+
+/* Cabeçalho */
+.table-estoque thead tr {
+  border-bottom: 1px solid #e5e7eb; /* border-b */
+  background-color: #f9fafb;
+}
+
+.table-estoque th {
+  height: 40px;
+  padding: 0.5rem;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Linhas */
+.table-estoque tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.table-estoque tbody tr:hover {
+  background-color: #f3f4f6; /* hover:bg-muted/50 */
+}
+
+/* Células */
+.table-estoque td {
+  padding: 0.5rem;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Quando não há itens */
+.table-estoque .empty-row td {
+  text-align: center;
+  padding: 2rem 0;
+  color: #9ca3af;
+}
+
+/* Ações */
+.table-estoque td .btn-acoes {
+  display: inline-flex;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
