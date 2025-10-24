@@ -53,10 +53,10 @@ const modalManager = {
         tipoSelect.innerHTML = '<option value="">Selecione o tipo de item</option>';
 
         const tipos = {
-            roupas: ['Body', 'Macacão', 'Manta', 'Calça', 'Conjunto'],
-            acessorios: ['Babador', 'Fralda De Pano', 'Chupeta'],
-            higiene: ['Fralda Descartável', 'Lenço Umedecido', 'Sabonete'],
-            alimentacao: ['Mamadeira', 'Copo', 'Pratinho']
+            roupas: ['Body', 'Macacão', 'Manta', 'Calça', 'Conjunto', 'Short', 'Vestido', 'Touca', 'Meia', 'Sapato'],
+            acessorios: ['Babador', 'Fralda De Pano', 'Chupeta', 'Mordedor', 'Brinquedo'],
+            higiene: ['Fralda Descartável', 'Lenço Umedecido', 'Sabonete', 'Shampoo', 'Óleo', 'Pomada', 'Álcool Gel'],
+            alimentacao: ['Mamadeira', 'Copo', 'Pratinho', 'Colher', 'Babador']
         };
 
         if (categoria && tipos[categoria]) {
@@ -75,7 +75,7 @@ const modalManager = {
     mostrarCamposPorCategoria(categoria) {
         if (categoria === 'roupas') {
             document.getElementById('generoContainer').style.display = 'block';
-        } else if (categoria === 'higiene' || categoria === 'alimentacao') {
+        } else if (categoria === 'higiene') {
             document.getElementById('validadeContainer').style.display = 'block';
         }
     },
