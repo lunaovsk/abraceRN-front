@@ -1,3 +1,24 @@
+const showToast=(message, type = "info") => {
+    const colors = {
+        success: "linear-gradient(to right, #00b09b, #96c93d)",
+        error: "linear-gradient(to right, #ff5f6d, #ffc371)",
+        info: "linear-gradient(to right, #2193b0, #6dd5ed)"
+    };
+
+    Toastify({
+        text: message,
+        duration: 3000,
+        gravity: "top", // top ou bottom
+        position: "right", // left, center ou right
+        style: {
+            borderRadius: "5px",
+            background: colors[type] || colors.info,
+        },
+        close: true
+    }).showToast();
+}
+
+
 const modalManager = {
     init() {
         this.modal = document.getElementById('modal');
@@ -77,6 +98,8 @@ const modalManager = {
             document.getElementById('generoContainer').style.display = 'block';
         } else if (categoria === 'higiene') {
             document.getElementById('validadeContainer').style.display = 'block';
+        }else if (categoria === 'alimentacao'){
+            document.getElementById('validadeContainer').style.display = 'block';
         }
     },
 
@@ -98,7 +121,7 @@ const modalManager = {
 
         const erro = this.validarFormulario();
         if (erro) {
-            alert(erro);
+            showToast(erro, "error");
             return;
         }
 
@@ -106,12 +129,12 @@ const modalManager = {
             const dados = this.prepararDados();
             await apiService.cadastrarItem(dados);
             
-            alert('Item cadastrado com sucesso!');
+            showToast('Item cadastrado com sucesso!', "success");
             this.fecharModal();
             await app.recarregarTotal();
             
         } catch (error) {
-            alert('Erro ao cadastrar item');
+            showToast('Erro ao cadastrar item', "error");
         }
     },
 

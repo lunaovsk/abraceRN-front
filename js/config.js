@@ -5,3 +5,4 @@ const configAPI = {
 const elementosDOM = {
     totalItens: document.getElementById('totalItens')
 };
+
