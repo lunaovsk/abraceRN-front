@@ -1,5 +1,5 @@
 const apiService = {
-    
+
     async cadastrarItem(dadosItem) {
         const response = await fetch(`${configAPI.baseURL}`, {
             method: 'POST',
@@ -12,13 +12,13 @@ const apiService = {
         if (!response.ok) {
             throw new Error('Erro ao cadastrar item');
         }
-        
+
         return response;
     },
 
     async buscarTotalItens() {
         try {
-            const response = await fetch(`${configAPI.baseURL}`, {
+            const response = await fetch(`${configAPI.baseURL}/total`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,5 +36,45 @@ const apiService = {
             console.error(error);
             throw error;
         }
+    },
+
+    async localizarTodosItens() {
+        try {
+            const response = await fetch(`${configAPI.baseURL}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao localizar os itens');
+            }
+
+            const data = await response.json();
+            return data;
+
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    },
+
+    async deleteItem(id) {
+    try {
+        const res = await fetch(`${configAPI.baseURL}/deletar/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (!res.ok) {
+            throw new Error('Erro ao deletar item');
+        }
+
+        return true; // sucesso
+    } catch (error) {
+        console.error(error);
+        return false; // falha
     }
+    },
+    
 };

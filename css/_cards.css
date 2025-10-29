@@ -17,6 +17,8 @@ input {
     width: 100%;
     font-size: 24px;
     color: #ffffff;
+    outline: none;
+    user-select: none;
 }
 
 .container-card1, .container-card2, .container-card3, .container-card4{

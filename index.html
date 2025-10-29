@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 </head>
+
 <body>
     <header>
         <div class="container-header">
@@ -27,32 +29,34 @@
         <div class="container-cards">
             <div class="container-input container-card1">
                 <label for="">Total de Itens</label>
-                <input type="number" name="total-itens" id="totalItens" readonly value = "0">
+                <input type="number" name="total-itens" id="totalItens" disabled value="0">
             </div>
             <div class="container-input container-card2">
                 <label for="">Tipos Cadastrados</label>
-                <input type="number" name="type" id="tipoCadastrado" readonly value="0">
+                <input type="number" name="type" id="tipoCadastrado" disabled value="0">
             </div>
             <div class="container-input container-card3">
                 <label for="">Categorias</label>
-                <input type="number" name="categorias" id="categorias" readonly value="0">
+                <input type="number" name="categorias" id="categorias" disabled value="0">
             </div>
             <div class="container-input container-card4">
                 <label for="">Itens Únicos</label>
-                <input type="number" name="itens-unicos" id="itensUnicos" readonly value="0">
+                <input type="number" name="itens-unicos" id="itensUnicos" disabled value="0">
             </div>
         </div>
-        
+
         <div class="container-filter">
             <div class="container-filter-title">
                 <p><i class="fa-solid fa-filter" style="color: #0A0A0A;"></i> Filtros e Pesquisa</p>
             </div>
             <div class="container-filter-select">
                 <div class="container-select">
-                    <i class="fa-solid fa-magnifying-glass" style="font-size: 14px; color: #828291; padding-left: 24px;"></i>
-                    <input type="text" class="container-filter-input" placeholder="Pesquisar itens..." id="inputPesquisa">
+                    <i class="fa-solid fa-magnifying-glass"
+                        style="font-size: 14px; color: #828291; padding-left: 24px;"></i>
+                    <input type="text" class="container-filter-input" placeholder="Pesquisar itens..."
+                        id="inputPesquisa">
                 </div>
-                <div class="container-select">           
+                <div class="container-select">
                     <select id="selectCategoria" name="todas-categorias" class="container-option">
                         <option value="">Todas as categorias</option>
                         <option value="roupas">Roupas</option>
@@ -61,7 +65,7 @@
                         <option value="alimentacao">Alimentação</option>
                     </select>
                 </div>
-                <div class="container-select">              
+                <div class="container-select">
                     <select id="selectTipo" name="" class="container-option">
                         <option value="">Todos os tipos</option>
                         <option value="body">Body</option>
@@ -71,7 +75,7 @@
                         <option value="sapato">Sapato</option>
                     </select>
                 </div>
-                <div class="container-select">              
+                <div class="container-select">
                     <select id="selectTamanho" name="" class="container-option">
                         <option value="">Todos os tamanhos</option>
                         <option value="rn">RN</option>
@@ -81,7 +85,7 @@
                     </select>
                 </div>
             </div>
-        </div> 
+        </div>
 
         <div class="card-estoque">
             <div class="card-estoque-header">
@@ -108,6 +112,39 @@
                         <tr>
                             <td colspan="7" class="mensagem-lista-vazia">Carregando itens...</td>
                         </tr>
+                        <tr>
+                            <td><span>Body</span></td>
+                            <td><span class="tag">Roupa</span></td>
+                            <td><span class="tag white">RN</span></td>
+                            <td><span>Gênero:</span><br>
+                                <span class="tag">
+                                    Unissex
+                                </span>
+                            </td>
+                            <td><span class="quantidade-badge">25</span></td>
+                            <td><span class="">14/01/2024</span></td>
+                            <td>
+                                <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn-action trash"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span>Body</span></td>
+                            <td><span class="tag">Roupa</span></td>
+                            <td><span class="tag white">RN</span></td>
+                            <td><span>Validade:</span><br>
+                                <span class="tag white">
+                                    30/12/2025
+                                </span>
+                            </td>
+                            <td><span class="quantidade-badge">25</span></td>
+                            <td><span class="">14/01/2024</span></td>
+                            <td>
+                                <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn-action trash"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -119,7 +156,7 @@
         <div class="modal-content">
             <h2>Adicionar Novo Item</h2>
             <p>Preencha as informações para adicionar um novo item ao estoque.</p>
-            
+
             <form id="itemForm">
                 <!-- Categoria -->
                 <label for="categoria">Categoria</label>
@@ -165,7 +202,7 @@
                     <label for="validade">Data de Validade</label>
                     <input type="date" id="validade">
                 </div>
-                    <!-- Gênero -->
+                <!-- Gênero -->
                 <div id="generoContainer" style="display:none;" class="container-genero">
                     <div>
                         <label for="genero">Gênero</label>
@@ -194,4 +231,5 @@
     <script src="./js/modalAddItem.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
+
 </html>
