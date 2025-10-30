@@ -6,7 +6,7 @@ async function preencherTotal() {
 
 // Buscar lista paginada
 async function carregarPagina(page = 0, size = 10) {
-    const data = await apiService.localizarItens(page,size);
+    const data = await apiService.localizarItens(page, size);
 
     preencherTabela(data); // Atualiza tabela
     atualizarPaginacao(data); // Atualiza botões
@@ -96,23 +96,66 @@ function atualizarPaginacao(data) {
 // Deletar item
 async function handleDelete(id) {
     try {
-        const resp = await apiService.deleteItem(id);
+        const result = await Swal.fire({
+            title: 'Tem certeza?',
+            text: "Tem certeza que gostaria de excluir esse item? Essa ação não pode ser desfeita!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sim, deletar',
+            cancelButtonText: 'Cancelar'
+        });
 
-        if (!resp) {
-            showToast('Erro ao deletar!', 'error');
+        // Se o usuário cancelar, sai da função
+        if (!result.isConfirmed) {
+            Swal.fire({
+                title: 'Cancelado exclução!',
+                text: 'Não foi excluido o item.',
+                icon: 'info',
+                confirmButtonText: 'Ok'
+            });
+
             return;
         }
 
-        showToast('Sucesso ao deletar!', 'success');
+        // Agora sim, deletar
+        const resp = await apiService.deleteItem(id);
 
-        // Recarregar página atual mantendo paginação
-        const paginaAtual = document.querySelector("#paginacao span").textContent.match(/\d+/)[0] - 1;
+        if (!resp) {
+            // 3) Erro
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Não foi possível excluir o item.',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+            return;
+        }
+
+        // 2) Sucesso
+        await Swal.fire({
+            title: 'Excluido!',
+            text: 'O item foi excluido com sucesso.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+
+        // Recarregar mantendo paginação
+        const paginaAtual = document.querySelector("#paginacao span")
+            .textContent.match(/\d+/)[0] - 1;
+
         carregarPagina(paginaAtual);
-
         preencherTotal();
 
     } catch (error) {
         console.error(error);
-        showToast('Erro ao deletar!', 'error');
+        // 3) Erro
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Não foi possível excluir o item.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
     }
 }

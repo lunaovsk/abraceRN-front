@@ -1,4 +1,4 @@
-const showToast=(message, type = "info") => {
+const showToast = (message, type = "info") => {
     const colors = {
         success: "linear-gradient(to right, #00b09b, #96c93d)",
         error: "linear-gradient(to right, #ff5f6d, #ffc371)",
@@ -31,13 +31,21 @@ const modalManager = {
 
     setupEventListeners() {
         this.openModal.addEventListener('click', () => this.abrirModal());
-        this.closeModal.addEventListener('click', () => this.fecharModal());
+        this.closeModal.addEventListener('click', () => {
+            Swal.fire({
+                title: 'Cancelado cadastro!',
+                text: 'Foi cancelado o cadastrado do item.',
+                icon: 'info',
+                confirmButtonText: 'Ok'
+            });
+            this.fecharModal()
+        });
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-        
-        document.getElementById('categoria').addEventListener('change', (e) => 
+
+        document.getElementById('categoria').addEventListener('change', (e) =>
             this.handleCategoriaChange(e.target.value));
-            
-        document.getElementById('tipo').addEventListener('change', (e) => 
+
+        document.getElementById('tipo').addEventListener('change', (e) =>
             this.handleTipoChange(e.target.value));
     },
 
@@ -98,7 +106,7 @@ const modalManager = {
             document.getElementById('generoContainer').style.display = 'block';
         } else if (categoria === 'higiene') {
             document.getElementById('validadeContainer').style.display = 'block';
-        }else if (categoria === 'alimentacao'){
+        } else if (categoria === 'alimentacao') {
             document.getElementById('validadeContainer').style.display = 'block';
         }
     },
@@ -122,19 +130,24 @@ const modalManager = {
         const erro = this.validarFormulario();
         if (erro) {
             showToast(erro, "error");
+
             return;
         }
 
         try {
             const dados = this.prepararDados();
             await apiService.cadastrarItem(dados);
-            
-            showToast('Item cadastrado com sucesso!', "success");
+
             this.fecharModal();
             await app.recarregarTotal();
-            
+
         } catch (error) {
-            showToast('Erro ao cadastrar item', "error");
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Erro ao cadastrar item',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
         }
     },
 
@@ -147,8 +160,8 @@ const modalManager = {
         if (!tipo) return 'Selecione um tipo de item';
         if (!quantidade || quantidade <= 0) return 'Informe uma quantidade válida';
 
-        if ((categoria === 'roupas' || categoria === 'acessorios') && 
-            !document.getElementById('tamanho').value && 
+        if ((categoria === 'roupas' || categoria === 'acessorios') &&
+            !document.getElementById('tamanho').value &&
             document.getElementById('tamanhoContainer').style.display === 'block') {
             return 'Selecione um tamanho';
         }
@@ -157,7 +170,7 @@ const modalManager = {
             return 'Selecione um gênero';
         }
 
-        if ((categoria === 'higiene' || categoria === 'alimentacao') && 
+        if ((categoria === 'higiene' || categoria === 'alimentacao') &&
             !document.getElementById('validade').value) {
             return 'Informe a data de validade';
         }
@@ -167,17 +180,17 @@ const modalManager = {
 
     prepararDados() {
         const categoria = document.getElementById('categoria').value;
-        
+
         const mapeamentoCategorias = {
             'roupas': 'ROUPA',
-            'acessorios': 'ACESSORIO', 
+            'acessorios': 'ACESSORIO',
             'higiene': 'HIGIENE',
             'alimentacao': 'ALIMENTACAO'
         };
 
         const mapeamentoGeneros = {
             'masculino': 'M',
-            'feminino': 'F', 
+            'feminino': 'F',
             'unissex': 'UNISSEX'
         };
 
@@ -185,8 +198,8 @@ const modalManager = {
             itemName: document.getElementById('tipo').options[document.getElementById('tipo').selectedIndex].text,
             type: mapeamentoCategorias[categoria],
             size: document.getElementById('tamanho').value || null,
-            gender: document.getElementById('genero').value ? 
-            mapeamentoGeneros[document.getElementById('genero').value] : null,
+            gender: document.getElementById('genero').value ?
+                mapeamentoGeneros[document.getElementById('genero').value] : null,
             quantity: parseInt(document.getElementById('quantidade').value),
             expirationAt: document.getElementById('validade').value || null
         };
