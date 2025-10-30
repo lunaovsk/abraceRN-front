@@ -38,43 +38,43 @@ const apiService = {
         }
     },
 
-    async localizarTodosItens() {
-        try {
-            const response = await fetch(`${configAPI.baseURL}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao localizar os itens');
-            }
-
-            const data = await response.json();
-            return data;
-
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    },
-
-    async deleteItem(id) {
+    async localizarItens(page = 0, size = 10) {
     try {
-        const res = await fetch(`${configAPI.baseURL}/deletar/${id}`, {
-            method: 'DELETE',
+        const response = await fetch(`${configAPI.baseURL}/all-items?page=${page}&size=${size}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         });
 
-        if (!res.ok) {
-            throw new Error('Erro ao deletar item');
+        if (!response.ok) {
+            throw new Error('Erro ao localizar os itens');
         }
 
-        return true; // sucesso
+        const data = await response.json();
+        return data;
+
     } catch (error) {
         console.error(error);
-        return false; // falha
+        throw error;
     }
+},
+
+    async deleteItem(id) {
+        try {
+            const res = await fetch(`${configAPI.baseURL}/deletar/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (!res.ok) {
+                throw new Error('Erro ao deletar item');
+            }
+
+            return true; // sucesso
+        } catch (error) {
+            console.error(error);
+            return false; // falha
+        }
     },
-    
+
 };

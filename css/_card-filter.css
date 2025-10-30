@@ -46,8 +46,16 @@
     height: 36px;
     color: #828291;
 }
-select:focus, select:valid {
+select:focus select:valid {
     color: black;
+    user-select: none;
+}
+
+input:focus{
+    border: 1px solid #828291;
+    border-radius: 5px;
+    box-shadow: #828291;
+    user-select: auto;
 }
 
 .container-filter-input {
