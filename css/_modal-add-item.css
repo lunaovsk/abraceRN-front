@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     font-family: "Arimo", sans-serif;
-    
+
 }
 
 .modal-content {
@@ -30,6 +30,7 @@
     margin-bottom: 10px;
 
 }
+
 .modal-content p {
     font-size: 14px;
     color: #717182;
@@ -40,6 +41,7 @@
     display: flex;
     flex-direction: column;
 }
+
 .modal-content label {
     font-size: 14px;
     color: #0A0A0A;
@@ -58,6 +60,7 @@
     padding-left: 10px;
     cursor: pointer;
 }
+
 .modal-content select::placeholder {
     color: #717182;
     padding-left: 10px;
@@ -66,21 +69,25 @@
 form div {
     display: flex;
 }
+
 .container-qnt-size {
     width: 100%;
     display: flex;
     align-items: baseline;
 }
+
 .container-qnt {
     display: flex;
     flex-direction: column;
     width: 50%;
 }
+
 .container-qnt label {
     color: #0A0A0A;
     font-size: 14px;
     margin-bottom: 5px;
 }
+
 .container-qnt input {
     border: none;
     background-color: #F3F3F5;
@@ -95,12 +102,15 @@ form div {
 
 
 }
-.container-qnt input:focus, .container-qnt:valid {
+
+.container-qnt input:focus,
+.container-qnt:valid {
     color: #0A0A0A;
     font-size: 14px;
     padding-left: 10px;
 }
- .container-qnt input::placeholder {
+
+.container-qnt input::placeholder {
     font-size: 14px;
     color: #717182;
     padding-left: 10px;
@@ -113,7 +123,7 @@ form div {
 .container-tamanho label {
     color: #0A0A0A;
     font-size: 14px;
-   
+
 
 }
 
@@ -133,7 +143,7 @@ form div {
     display: flex;
     flex-direction: column;
 
-    
+
 
 }
 
@@ -150,18 +160,20 @@ form div {
     cursor: pointer;
 }
 
-.container-data input:focus, .container-data:valid {
+.container-data input:focus,
+.container-data:valid {
     color: #0A0A0A;
     font-size: 14px;
     padding-left: 10px;
 }
- .container-data input::placeholder {
+
+.container-data input::placeholder {
     font-size: 14px;
     color: #717182;
     padding-left: 10px;
 }
 
-.buttons { 
+.buttons {
     display: flex;
     justify-content: flex-end;
     height: 36px;
@@ -177,6 +189,7 @@ form div {
     font-size: 14px;
     cursor: pointer;
 }
+
 .cancelar:hover {
     background-color: #F3F3F5;
 }
@@ -191,7 +204,16 @@ form div {
     color: #ffffff;
     cursor: pointer;
 }
+
 .adicionar:hover {
     background: linear-gradient(to right, #2563EB, #7E22CE);
 
+}
+
+.readonly-select {
+    pointer-events: none;
+    /* bloqueia clique */
+    background-color: #e0e0e0;
+    /* visual de desabilitado */
+    color: #555;
 }

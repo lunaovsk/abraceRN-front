@@ -1,45 +1,35 @@
-const showToast = (message, type = "info") => {
-    const colors = {
-        success: "linear-gradient(to right, #00b09b, #96c93d)",
-        error: "linear-gradient(to right, #ff5f6d, #ffc371)",
-        info: "linear-gradient(to right, #2193b0, #6dd5ed)"
-    };
-
-    Toastify({
-        text: message,
-        duration: 3000,
-        gravity: "top", // top ou bottom
-        position: "right", // left, center ou right
-        style: {
-            borderRadius: "5px",
-            background: colors[type] || colors.info,
-        },
-        close: true
-    }).showToast();
-}
-
-
 const modalManager = {
+    isUpdate: false,
+    currentItemId: null,
+
     init() {
         this.modal = document.getElementById('modal');
         this.openModal = document.getElementById('openModal');
         this.closeModal = document.getElementById('closeModal');
         this.form = document.getElementById('itemForm');
+        this.submitButton = this.form.querySelector(".adicionar");
         this.setupEventListeners();
         this.resetarModal();
     },
 
     setupEventListeners() {
-        this.openModal.addEventListener('click', () => this.abrirModal());
+        this.openModal.addEventListener('click', () => {
+            this.isUpdate = false;
+            this.currentItemId = null;
+            this.submitButton.innerHTML = "Adicionar Item";
+            this.abrirModal();
+        });
+
         this.closeModal.addEventListener('click', () => {
             Swal.fire({
-                title: 'Cancelado cadastro!',
-                text: 'Foi cancelado o cadastrado do item.',
+                title: 'Cancelado!',
+                text: 'Operação cancelada.',
                 icon: 'info',
                 confirmButtonText: 'Ok'
             });
             this.fecharModal()
         });
+
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
 
         document.getElementById('categoria').addEventListener('change', (e) =>
@@ -61,8 +51,16 @@ const modalManager = {
     resetarModal() {
         this.form.reset();
         this.ocultarCamposAdicionais();
+        document.getElementById('categoria').classList.remove('readonly-select');
         document.getElementById('tipo').innerHTML = '<option value="">Selecione o tipo de item</option>';
         document.getElementById('tipo').disabled = true;
+        const modalTitle = this.modal.querySelector("h2");
+        const modalDesc = this.modal.querySelector("p");
+        modalTitle.innerHTML = "Adicionar Novo Item";
+        modalDesc.innerHTML = "Preencha as informações para adicionar um novo item ao estoque.";
+        this.isUpdate = false;
+        this.currentItemId = null;
+        this.submitButton.innerHTML = "Adicionar Item";
     },
 
     ocultarCamposAdicionais() {
@@ -82,8 +80,8 @@ const modalManager = {
         tipoSelect.innerHTML = '<option value="">Selecione o tipo de item</option>';
 
         const tipos = {
-            roupas: ['Body', 'Macacão', 'Manta', 'Calça', 'Conjunto', 'Short', 'Vestido', 'Touca', 'Meia', 'Sapato'],
-            acessorios: ['Babador', 'Fralda De Pano', 'Chupeta', 'Mordedor', 'Brinquedo'],
+            roupa: ['Body', 'Macacão', 'Manta', 'Calça', 'Conjunto', 'Short', 'Vestido', 'Touca', 'Meia', 'Sapato'],
+            acessorio: ['Babador', 'Fralda De Pano', 'Chupeta', 'Mordedor', 'Brinquedo'],
             higiene: ['Fralda Descartável', 'Lenço Umedecido', 'Sabonete', 'Shampoo', 'Óleo', 'Pomada', 'Álcool Gel'],
             alimentacao: ['Mamadeira', 'Copo', 'Pratinho', 'Colher', 'Babador']
         };
@@ -102,11 +100,10 @@ const modalManager = {
     },
 
     mostrarCamposPorCategoria(categoria) {
-        if (categoria === 'roupas') {
+        if (categoria === 'roupa') {
             document.getElementById('generoContainer').style.display = 'block';
-        } else if (categoria === 'higiene') {
-            document.getElementById('validadeContainer').style.display = 'block';
-        } else if (categoria === 'alimentacao') {
+        }
+        if (categoria === 'higiene' || categoria === 'alimentacao') {
             document.getElementById('validadeContainer').style.display = 'block';
         }
     },
@@ -118,8 +115,8 @@ const modalManager = {
     },
 
     deveMostrarTamanho(categoria, tipo) {
-        if (categoria === 'roupas') return true;
-        if (categoria === 'acessorios') return ['babador', 'fralda-de-pano'].includes(tipo);
+        if (categoria === 'roupa') return true;
+        if (categoria === 'acessorio') return ['babador', 'fralda de pano'].includes(tipo);
         if (categoria === 'higiene') return tipo === 'fralda descartável';
         return false;
     },
@@ -130,21 +127,32 @@ const modalManager = {
         const erro = this.validarFormulario();
         if (erro) {
             showToast(erro, "error");
-
             return;
         }
 
         try {
             const dados = this.prepararDados();
-            await apiService.cadastrarItem(dados);
+
+            if (this.isUpdate && this.currentItemId) {
+                await apiService.atualizarItem(this.currentItemId, dados);
+                await Swal.fire({
+                    title: 'Atualizado!',
+                    text: 'O item foi atualizado com sucesso.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                await apiService.cadastrarItem(dados);
+            }
 
             this.fecharModal();
             await app.recarregarTotal();
 
         } catch (error) {
+            console.log(error);
             Swal.fire({
                 title: 'Erro!',
-                text: 'Erro ao cadastrar item',
+                text: 'Erro ao processar item',
                 icon: 'error',
                 confirmButtonText: 'Ok'
             });
@@ -160,13 +168,13 @@ const modalManager = {
         if (!tipo) return 'Selecione um tipo de item';
         if (!quantidade || quantidade <= 0) return 'Informe uma quantidade válida';
 
-        if ((categoria === 'roupas' || categoria === 'acessorios') &&
+        if ((categoria === 'roupa' || categoria === 'acessorio') &&
             !document.getElementById('tamanho').value &&
             document.getElementById('tamanhoContainer').style.display === 'block') {
             return 'Selecione um tamanho';
         }
 
-        if (categoria === 'roupas' && !document.getElementById('genero').value) {
+        if (categoria === 'roupa' && !document.getElementById('genero').value) {
             return 'Selecione um gênero';
         }
 
@@ -180,29 +188,80 @@ const modalManager = {
 
     prepararDados() {
         const categoria = document.getElementById('categoria').value;
-
         const mapeamentoCategorias = {
-            'roupas': 'ROUPA',
-            'acessorios': 'ACESSORIO',
+            'roupa': 'ROUPA',
+            'acessorio': 'ACESSORIO',
             'higiene': 'HIGIENE',
             'alimentacao': 'ALIMENTACAO'
         };
-
         const mapeamentoGeneros = {
-            'masculino': 'M',
-            'feminino': 'F',
-            'unissex': 'UNISSEX'
+            'M': 'M',
+            'F': 'F',
+            'UNISSEX': 'UNISSEX'
         };
+
+        const sizeValue = document.getElementById('tamanho').value;
+        const genderValue = document.getElementById('genero').value;
+
+        if (categoria === 'roupa' && (!sizeValue || !genderValue)) {
+            throw new Error("Roupas precisam de tamanho e gênero");
+        }
 
         return {
             itemName: document.getElementById('tipo').options[document.getElementById('tipo').selectedIndex].text,
             type: mapeamentoCategorias[categoria],
-            size: document.getElementById('tamanho').value || null,
-            gender: document.getElementById('genero').value ?
-                mapeamentoGeneros[document.getElementById('genero').value] : null,
+            size: sizeValue || null,
+            gender: genderValue ? mapeamentoGeneros[genderValue] : null,
             quantity: parseInt(document.getElementById('quantidade').value),
             expirationAt: document.getElementById('validade').value || null
         };
+    },
+
+    prepararDadosUpdate(dadosItem) {
+        this.isUpdate = true;
+        this.currentItemId = dadosItem.id;
+
+        const categoria = document.getElementById('categoria');
+        const tipo = document.getElementById('tipo');
+        const quantidade = document.getElementById('quantidade');
+        const tamanho = document.getElementById('tamanho');
+        const genero = document.getElementById('genero');
+        const validade = document.getElementById('validade');
+
+        const modal = document.querySelector(".modal-content");
+        const buttonUpdate = this.submitButton;
+
+        modal.querySelector("h2").innerHTML = "Atualizar o Item";
+        modal.querySelector("p").innerHTML = "Preencha as informações para atualizar o item ao estoque.";
+        buttonUpdate.innerHTML = "Atualizar Item";
+
+        this.abrirModal();
+
+        categoria.value = dadosItem.type.toLowerCase();
+        categoria.classList.add('readonly-select');
+        this.handleCategoriaChange(categoria.value);
+
+        setTimeout(() => {
+            tipo.value = dadosItem.itemName.toLowerCase();
+        }, 50);
+
+        quantidade.value = dadosItem.quantity || 1;
+
+        if (dadosItem.size) {
+            tamanho.value = dadosItem.size.toLowerCase();
+            document.getElementById('tamanhoContainer').style.display = 'block';
+        }
+
+        if (dadosItem.gender) {
+            genero.value = dadosItem.gender;
+            document.getElementById('generoContainer').style.display = 'block';
+        }
+
+        if (dadosItem.expirationAt) {
+            validade.value = dadosItem.expirationAt;
+            document.getElementById('validadeContainer').style.display = 'block';
+        }
+
     }
 };
 

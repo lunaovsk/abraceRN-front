@@ -108,6 +108,26 @@ const apiService = {
         }
     },
 
+    async atualizarItem(id,dadosItem){
+        try {
+            const response = await fetch(`${configAPI.baseURL}/atualizar/${id}`,
+            {
+                method: 'PUT',
+                headers:{
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify(dadosItem)
+            });
+
+            return response;
+        } catch (error) {
+
+            console.log(error);
+            throw error;
+            
+        }
+    },
+
     async deleteItem(id) {
         try {
             const res = await fetch(`${configAPI.baseURL}/deletar/${id}`, {

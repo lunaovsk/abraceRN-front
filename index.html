@@ -59,8 +59,8 @@
                 <div class="container-select">
                     <select id="selectCategoria" name="todas-categorias" class="container-option">
                         <option value="">Todas as categorias</option>
-                        <option value="roupas">Roupas</option>
-                        <option value="acessorios">Acessórios</option>
+                        <option value="roupa">Roupas</option>
+                        <option value="acessorio">Acessórios</option>
                         <option value="higiene">Higiene</option>
                         <option value="alimentacao">Alimentação</option>
                     </select>
@@ -71,7 +71,7 @@
                         <option value="body">Body</option>
                         <option value="macacao">Macacão</option>
                         <option value="manta">Manta</option>
-                        <option value="fralda">Fralda de pano</option>
+                        <option value="fralda de pano">Fralda de pano</option>
                         <option value="sapato">Sapato</option>
                     </select>
                 </div>
@@ -109,6 +109,9 @@
                         </tr>
                     </thead>
                     <tbody id="tbodyEstoque">
+                        <tr>
+                            <td colspan="7" class="mensagem-lista-vazia">Nenhum item encontrado...</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div id="paginacao" class="paginacao"></div>
@@ -127,8 +130,8 @@
                 <label for="categoria">Categoria</label>
                 <select id="categoria" required>
                     <option value="">Selecione a categoria</option>
-                    <option value="roupas">Roupas</option>
-                    <option value="acessorios">Acessórios</option>
+                    <option value="roupa">Roupas</option>
+                    <option value="acessorio">Acessórios</option>
                     <option value="higiene">Higiene</option>
                     <option value="alimentacao">Alimentação</option>
                 </select>
@@ -173,9 +176,9 @@
                         <label for="genero">Gênero</label>
                         <select id="genero">
                             <option value="">Selecione o gênero</option>
-                            <option value="masculino">M</option>
-                            <option value="feminino">F</option>
-                            <option value="unissex">Unissex</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                            <option value="UNISSEX">Unissex</option>
                         </select>
                     </div>
                 </div>

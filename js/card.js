@@ -21,7 +21,6 @@ function preencherTabela(lista) {
 
     atualizarContador(lista);
 
-    console.log(lista.content);
 
     if (lista.content.length === 0) {
         tbody.innerHTML = `
@@ -51,7 +50,7 @@ function preencherTabela(lista) {
             <td><span class="quantidade-badge">${item.quantity || 0}</span></td>
             <td><span>${item.createdAt ? formatarData(item.createdAt) : "N/A"}</span></td>
             <td class="actions">
-                <button class="btn-action">
+                <button class="btn-action" onclick='handleUpdate(${item.id},${JSON.stringify(item)})'>
                     <i class="fa-solid fa-pen"></i>
                 </button>
                 <button class="btn-action trash" onclick="handleDelete(${item.id})">
@@ -92,6 +91,47 @@ function atualizarPaginacao(data) {
         <button onclick="carregarPagina(${data.number + 1})" ${data.last ? "disabled" : ""}>Próxima</button>
     `;
 }
+
+// Atualizar item
+async function handleUpdate(id, dataItem) {
+
+    console.log(`${id}e item${JSON.stringify(dataItem)}`)
+
+    modalManager.prepararDadosUpdate(dataItem);
+
+
+    try {
+
+        const response = await apiService.atualizarItem(id, dataItem);
+
+        if (!response) { // 3) Erro
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Não foi possível atualizar o item.',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+            return;
+        }
+
+        console.log(response);
+
+
+    } catch (erro) {
+        console.error(erro);
+
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Não foi possível atualizar o item.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+
+}
+
+// Abrir Modal Exibição
+
 
 // Deletar item
 async function handleDelete(id) {
