@@ -1,0 +1,201 @@
+.card-estoque {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 32px;
+  height: auto;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  opacity: 0.7;
+}
+
+.card-estoque-header {
+  padding: 24px 0 30px 24px;
+  font-size: 16px;
+  font-family: var(--font-body);
+  color: #0A0A0A;
+}
+
+.card-estoque-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 30px 30px 30px;
+  font-size: 16px;
+  font-family: var(--font-body);
+  color: #0A0A0A;
+}
+
+/* ===== Estilo da Tabela de Estoque ===== */
+.table-estoque {
+  border: 1px solid #E4E4E7;
+  border-radius: 5px;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  color: #1f2937;
+  /* text-foreground */
+}
+
+/* Cabeçalho */
+.table-estoque thead tr {
+  border-bottom: 1px solid #e5e7eb;
+  /* border-b */
+}
+
+.table-estoque th {
+  height: 40px;
+  padding: 0.5rem;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Linhas */
+.table-estoque tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.table-estoque tbody tr:hover {
+  background-color: #f3f4f6;
+  /* hover:bg-muted/50 */
+}
+
+/* Células */
+.table-estoque td {
+  padding: 0.5rem;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Quando não há itens */
+.table-estoque .empty-row td {
+  text-align: center;
+  padding: 2rem 0;
+  color: #9ca3af;
+}
+
+/* Ações */
+.table-estoque td .btn-acoes {
+  display: inline-flex;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== TABELA NOVA ESTILIZAÇÃO ===== */
+.table-estoque {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+}
+
+.table-estoque thead th {
+  text-align: left;
+  font-weight: 600;
+  padding: 12px 16px;
+  color: #3F3F46;
+
+  border-bottom: 1px solid #E4E4E7;
+}
+
+.table-estoque tbody tr {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+}
+
+.table-estoque tbody td {
+  padding: 12px 16px;
+  color: #3F3F46;
+  font-size: 14px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.mensagem-lista-vazia {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: #555;
+    position: relative;
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* animação suave estilo Nubank */
+@keyframes pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+/* Tags (Categoria, Tamanho, Gênero, etc.) */
+.table-estoque .tag {
+  display: inline-block;
+  background: #a1a1a5d1;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-weight: bold;
+  color: #0A0A0A;
+}
+
+.table-estoque .tag.white {
+  border: 1px solid #EDECF1;
+  background-color: transparent;
+}
+
+/* Quantidade com "bolinha" */
+.quantidade-badge {
+  background: #E0EAFF;
+  color: #3F4EFC;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+/* Ações */
+.btn-action {
+  background: #FFFFFF;
+  border: 1px solid #D4D4D8;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-action.trash i {
+  color: red;
+}
+
+.btn-action i {
+  font-size: 14px;
+  color: #444;
+}
+
+.btn-action:hover {
+  background: #F4F4F5;
+}
+
+/* Paginação dos items */
+.paginacao {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.paginacao button {
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.paginacao button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
