@@ -1,8 +1,7 @@
+const BASE_URL = configAPI.baseURL;
+
 const apiService = {
-
     async cadastrarItem(dadosItem) {
-
-        // 1) Pergunta antes de cadastrar
         const result = await Swal.fire({
             title: 'Confirmar cadastro?',
             text: "Deseja realmente cadastrar este item?",
@@ -12,7 +11,6 @@ const apiService = {
             cancelButtonText: 'Cancelar'
         });
 
-        // Se o usuário cancelar, sai da função
         if (!result.isConfirmed) {
             Swal.fire({
                 title: 'Cancelado cadastro!',
@@ -24,7 +22,7 @@ const apiService = {
         }
 
         try {
-            const response = await fetch(`${configAPI.baseURL}`, {
+            const response = await fetch(`${BASE_URL}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +36,6 @@ const apiService = {
 
             modalManager.fecharModal();
 
-            // 2) Sucesso
             await Swal.fire({
                 title: 'Cadastrado!',
                 text: 'O item foi cadastrado com sucesso.',
@@ -46,11 +43,10 @@ const apiService = {
                 confirmButtonText: 'OK'
             });
 
+            app.carregarItens(0, 10);
             return response;
 
         } catch (error) {
-
-            // 3) Erro
             Swal.fire({
                 title: 'Erro!',
                 text: 'Não foi possível cadastrar o item.',
@@ -63,10 +59,9 @@ const apiService = {
         }
     },
 
-
     async buscarTotalItens() {
         try {
-            const response = await fetch(`${configAPI.baseURL}/total`, {
+            const response = await fetch(`${BASE_URL}/total`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,21 +81,30 @@ const apiService = {
         }
     },
 
-    async localizarItens(page = 0, size = 10) {
+    async localizarItens(filtros = {}, page = 0, size = 10) {
         try {
-            const response = await fetch(`${configAPI.baseURL}/all-items?page=${page}&size=${size}`, {
+            const params = new URLSearchParams();
+
+            if (filtros.categoria) params.append('type', filtros.categoria.toUpperCase());
+            if (filtros.tipo) params.append('itemName', filtros.tipo);
+            if (filtros.tamanho) params.append('itemSize', filtros.tamanho.toUpperCase());
+            if (filtros.pesquisa) params.append('itemName', filtros.pesquisa); 
+
+            params.append('page', page);
+            params.append('size', size);
+
+            const urlFinal = `${BASE_URL}/all-items?${params.toString()}`;
+
+            const response = await fetch(urlFinal, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+                headers: { 'Content-Type': 'application/json' }
             });
 
             if (!response.ok) {
                 throw new Error('Erro ao localizar os itens');
             }
-
-            const data = await response.json();
-            return data;
+            
+            return await response.json();
 
         } catch (error) {
             console.error(error);
@@ -108,9 +112,41 @@ const apiService = {
         }
     },
 
-    async atualizarItem(id,dadosItem){
+    async buscarTiposPorCategoria(categoria) {
         try {
-            const response = await fetch(`${configAPI.baseURL}/atualizar/${id}`,
+            const urlFinal = `${BASE_URL}/types-by-category?category=${categoria}`;
+            const response = await fetch(urlFinal, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (!response.ok) throw new Error('Erro ao buscar tipos');
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    },
+
+    async buscarTodosTipos() {
+        try {
+            const urlFinal = `${BASE_URL}/all-types`;
+            const response = await fetch(urlFinal, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (!response.ok) throw new Error('Erro ao buscar todos os tipos');
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    },
+
+    async atualizarItem(id, dadosItem){
+        try {
+            const response = await fetch(`${BASE_URL}/atualizar/${id}`,
             {
                 method: 'PUT',
                 headers:{
@@ -121,16 +157,14 @@ const apiService = {
 
             return response;
         } catch (error) {
-
             console.log(error);
             throw error;
-            
         }
     },
 
     async deleteItem(id) {
         try {
-            const res = await fetch(`${configAPI.baseURL}/deletar/${id}`, {
+            const res = await fetch(`${BASE_URL}/deletar/${id}`, {
                 method: 'DELETE',
             });
 
@@ -138,11 +172,10 @@ const apiService = {
                 throw new Error('Erro ao deletar item');
             }
 
-            return true; // sucesso
+            return true;
         } catch (error) {
             console.error(error);
-            return false; // falha
+            return false;
         }
     },
-
 };

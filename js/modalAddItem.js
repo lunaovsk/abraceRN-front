@@ -146,16 +146,10 @@ const modalManager = {
             }
 
             this.fecharModal();
-            await app.recarregarTotal();
+            await app.carregarItens(0, 10);
 
         } catch (error) {
             console.log(error);
-            Swal.fire({
-                title: 'Erro!',
-                text: 'Erro ao processar item',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
         }
     },
 
@@ -188,12 +182,14 @@ const modalManager = {
 
     prepararDados() {
         const categoria = document.getElementById('categoria').value;
+        
         const mapeamentoCategorias = {
             'roupa': 'ROUPA',
             'acessorio': 'ACESSORIO',
             'higiene': 'HIGIENE',
             'alimentacao': 'ALIMENTACAO'
         };
+        
         const mapeamentoGeneros = {
             'M': 'M',
             'F': 'F',
@@ -202,18 +198,25 @@ const modalManager = {
 
         const sizeValue = document.getElementById('tamanho').value;
         const genderValue = document.getElementById('genero').value;
+        
+        let validadeValue = document.getElementById('validade').value;
+        if (validadeValue === "") {
+            validadeValue = null;
+        }
 
-        if (categoria === 'roupa' && (!sizeValue || !genderValue)) {
-            throw new Error("Roupas precisam de tamanho e gênero");
+        let generoFinal = null;
+        if (genderValue && mapeamentoGeneros[genderValue]) {
+            generoFinal = mapeamentoGeneros[genderValue];
         }
 
         return {
             itemName: document.getElementById('tipo').options[document.getElementById('tipo').selectedIndex].text,
-            type: mapeamentoCategorias[categoria],
+            category: mapeamentoCategorias[categoria],
+            type: null,
             size: sizeValue || null,
-            gender: genderValue ? mapeamentoGeneros[genderValue] : null,
+            gender: generoFinal,
             quantity: parseInt(document.getElementById('quantidade').value),
-            expirationAt: document.getElementById('validade').value || null
+            expirationAt: validadeValue
         };
     },
 
@@ -264,6 +267,30 @@ const modalManager = {
 
     }
 };
+
+function showToast(message, type = "info") {
+    let backgroundColor;
+
+    if (type === "error") {
+        backgroundColor = "linear-gradient(to right, #d32f2f, #c62828)";
+    } else if (type === "success") {
+        backgroundColor = "linear-gradient(to right, #388e3c, #2e7d32)";
+    } else {
+        backgroundColor = "linear-gradient(to right, #1976d2, #1565c0)";
+    }
+
+    Toastify({
+        text: message,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+            background: backgroundColor,
+        },
+    }).showToast();
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     modalManager.init();

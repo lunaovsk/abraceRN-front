@@ -1,5 +1,5 @@
 const configAPI = {
-    baseURL: 'http://localhost:8080/dashboard'
+    baseURL: 'http://localhost:8084/dashboard'
 };
 
 const elementosDOM = {
