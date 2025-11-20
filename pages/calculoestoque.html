@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Kits Possíveis</title>
+    <link rel="shortcut icon" href="/img/Container.png">
+    <link rel="stylesheet" href="/css/_calculo-estoque.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="topbar esquerda">
+            <button class="back-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-arrow-left h-4 w-4 mr-2" aria-hidden="true">
+                    <path d="m12 19-7-7 7-7"></path>
+                    <path d="M19 12H5"></path>
+                </svg>
+                <span>Voltar ao Estoque</span>
+            </button>
+            <div class="linha-vertical"></div>
+            <div class="titulo">
+                <h1>Cálculo de Kits Possíveis</h1>
+                <p>Visualize quantos kits completos podem ser montados</p>
+            </div>
+        </div>
+        <button class="refresh-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-refresh-cw h-4 w-4 mr-2" aria-hidden="true">
+                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                <path d="M21 3v5h-5"></path>
+                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                <path d="M8 16H3v5"></path>
+            </svg>
+            <span>Atualizar Cálculo</span>
+        </button>
+    </header>
+
+    <section class="cards">
+        <div class="card blue">
+            <h3>📦 Kits de Enxoval Possíveis</h3>
+            <h1>3</h1>
+            <p>kits completos</p>
+        </div>
+
+        <div class="card purple">
+            <h3>🧴 Kits de Higiene Possíveis</h3>
+            <h1>5</h1>
+            <p>kits completos</p>
+        </div>
+
+        <div class="card orange">
+            <h3>⚠ Itens Limitantes</h3>
+            <p><b>Enxoval:</b> Meia</p>
+            <p><b>Higiene:</b> Fralda Descartável</p>
+        </div>
+    </section>
+
+    <section class="box">
+        <div class="box-header">
+            <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="#0b63f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-package h-5 w-5 text-blue-600" aria-hidden="true">
+                    <path
+                        d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z">
+                    </path>
+                    <path d="M12 22V12"></path>
+                    <polyline points="3.29 7 12 12 20.71 7"></polyline>
+                    <path d="m7.5 4.27 9 5.15"></path>
+                </svg> Kit de Enxoval</h3>
+            <p>Cada kit contém 6 tipos de itens essenciais para o recém-nascido</p>
+        </div>
+
+        <button class="btn-retirar">− Retirar Kit Completo de Enxoval</button>
+
+        <table class="tabela-kits">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th class="center">Quantidade em Estoque</th>
+                    <th class="center">Necessário por Kit</th>
+                    <th class="center">Kits Possíveis</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td class="capitalize">Body</td>
+                    <td class="center"><span class="badge badge-blue">25</span></td>
+                    <td class="center">5</td>
+                    <td class="center">5</td>
+                    <td>
+                        <span class="status-ok">
+                            ✔ Disponível
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="capitalize">Macacão</td>
+                    <td class="center"><span class="badge badge-blue">15</span></td>
+                    <td class="center">3</td>
+                    <td class="center">5</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+
+                <tr>
+                    <td class="capitalize">Manta</td>
+                    <td class="center"><span class="badge badge-blue">10</span></td>
+                    <td class="center">2</td>
+                    <td class="center">5</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+
+                <tr class="limitante">
+                    <td class="capitalize">
+                        Meia
+                        <span class="tag-limitante">Limitante</span>
+                    </td>
+                    <td class="center"><span class="badge badge-red">12</span></td>
+                    <td class="center">4</td>
+                    <td class="center red">3</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+
+                <tr>
+                    <td class="capitalize">Touca</td>
+                    <td class="center"><span class="badge badge-blue">8</span></td>
+                    <td class="center">2</td>
+                    <td class="center">4</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+
+                <tr>
+                    <td class="capitalize">Babador</td>
+                    <td class="center"><span class="badge badge-blue">20</span></td>
+                    <td class="center">3</td>
+                    <td class="center">6</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+    <section class="box">
+        <div class="box-header">
+            <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="#8a2be2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-package h-5 w-5 text-purple-600" aria-hidden="true">
+                    <path
+                        d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z">
+                    </path>
+                    <path d="M12 22V12"></path>
+                    <polyline points="3.29 7 12 12 20.71 7"></polyline>
+                    <path d="m7.5 4.27 9 5.15"></path>
+                </svg> Kit de Higiene</h3>
+            <p>Cada kit contém 5 tipos de itens de cuidado e limpeza</p>
+        </div>
+
+        <button class="btn-retirar higiene">− Retirar Kit Completo de Enxoval</button>
+
+        <table class="tabela-kits">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th class="center">Quantidade em Estoque</th>
+                    <th class="center">Necessário por Kit</th>
+                    <th class="center">Kits Possíveis</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td class="capitalize">Body</td>
+                    <td class="center"><span class="badge badge-blue">25</span></td>
+                    <td class="center">5</td>
+                    <td class="center">5</td>
+                    <td>
+                        <span class="status-ok">
+                            ✔ Disponível
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="capitalize">Macacão</td>
+                    <td class="center"><span class="badge badge-blue">15</span></td>
+                    <td class="center">3</td>
+                    <td class="center">5</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+
+                <tr>
+                    <td class="capitalize">Manta</td>
+                    <td class="center"><span class="badge badge-blue">10</span></td>
+                    <td class="center">2</td>
+                    <td class="center">5</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+
+                <tr class="limitante">
+                    <td class="capitalize">
+                        Meia
+                        <span class="tag-limitante">Limitante</span>
+                    </td>
+                    <td class="center"><span class="badge badge-red">12</span></td>
+                    <td class="center">4</td>
+                    <td class="center red">3</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+
+                <tr>
+                    <td class="capitalize">Touca</td>
+                    <td class="center"><span class="badge badge-blue">8</span></td>
+                    <td class="center">2</td>
+                    <td class="center">4</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+
+                <tr>
+                    <td class="capitalize">Babador</td>
+                    <td class="center"><span class="badge badge-blue">20</span></td>
+                    <td class="center">3</td>
+                    <td class="center">6</td>
+                    <td><span class="status-ok">✔ Disponível</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+    <script src="/js/calculoestoque.js" defer></script>
+</body>
+
+</html>

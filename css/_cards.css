@@ -5,9 +5,11 @@
     border: none;
     gap: 16px;
     flex-wrap: nowrap;
+
     & label {
         color: #ffffff;
         font-size: 14px;
+        font-weight: bold;
     }
 }
 
@@ -21,7 +23,11 @@ input {
     user-select: none;
 }
 
-.container-card1, .container-card2, .container-card3, .container-card4{
+.container-card1,
+.container-card2,
+.container-card3,
+.container-card4,
+.container-card5 {
     padding: 24px 0 0 24px;
     width: 100%;
     border-radius: 14px;
@@ -29,17 +35,53 @@ input {
     flex: 1;
 }
 
+.container-card5 {
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.container-card5-title {
+    display: flex;
+}
+
+.container-card5-title span {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.container-card5:hover {
+    transform: scale(1.06);
+    background: linear-gradient(to right, #0C8B67, #047857);
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.025);
+}
+
+
 .container-card1 {
     background: linear-gradient(to right, #2B7FFF, #155DFC)
 }
+
 .container-card2 {
     background: linear-gradient(to right, #AD46FF, #9810FA)
 }
+
 .container-card3 {
     background: linear-gradient(to right, #F6339A, #E60076)
 }
+
 .container-card4 {
     background: linear-gradient(to right, #615FFF, #4F39F6)
+}
+
+.container-card5 {
+    background: linear-gradient(to right, #10B981, #059169);
 }
 
 .container-input {

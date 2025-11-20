@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+}
+
+/* -------------------- TOPO -------------------- */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 5px 30px;
+    margin-bottom: 25px;
+    border: 1px solid #e4e4e4;
+}
+
+.topbar.esquerda {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    margin-bottom: 0;
+}
+
+.linha-vertical {
+    height: 30px;
+    width: 1px;
+    background-color: #d1d5db;
+    display: inline-block;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 5px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #444;
+}
+
+.back-btn:hover {
+    background: #19a0fa3b;
+    border-radius: 12px;
+}
+
+.titulo h1 {
+    font-size: 22px;
+    font-weight: 500;
+    color: rgba(87, 86, 86, 0.979);
+}
+
+.titulo p {
+    font-size: 14px;
+    color: #777;
+}
+
+.refresh-btn {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #19a0fa;
+    padding: 8px 16px;
+    border-radius: 8px;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.refresh-btn:hover {
+    background-color: #19a0fa3b;
+}
+
+/* -------------------- CARDS -------------------- */
+
+.cards {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.card {
+    width: 100%;
+    padding: 25px;
+    color: white;
+    border-radius: 20px;
+}
+
+.card h1 {
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+.blue {
+    background: #0666ff;
+}
+
+.purple {
+    background: linear-gradient(to right, #8a2be2, #c227fb);
+}
+
+.orange {
+    background: linear-gradient(to right, #ff8c00, #ff4500);
+}
+
+/* -------------------- SECTION BOX -------------------- */
+
+.box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e4e4e4;
+    margin: 20px 20px;
+}
+
+.box-header h3 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.box-header p {
+    color: #666;
+    margin-bottom: 18px;
+}
+
+/* RETIRAR BOTÃO */
+
+.btn-retirar {
+    width: 100%;
+    background: #0b63f3;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.btn-retirar:hover {
+    background: #0650c9;
+}
+
+.btn-retirar.higiene {
+    width: 100%;
+    background: #8a2be2;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.btn-retirar.higiene:hover {
+    background: #6a10be;
+}
+
+/* ===== TABELA NOVA ===== */
+
+.tabela-kits {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+table th:first-child {
+    border-top-left-radius: 12px;
+}
+
+table th:last-child {
+    border-top-right-radius: 12px;
+}
+
+.tabela-kits thead th {
+    background: #eef2f8;
+    padding: 12px;
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.tabela-kits .center {
+    text-align: center;
+}
+
+.tabela-kits tbody tr {
+    transition: background 0.2s ease;
+}
+
+.tabela-kits tbody tr:hover {
+    background: #f6f6f6;
+}
+
+.tabela-kits tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* ===== BADGES ===== */
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.badge-blue {
+    background: rgba(0, 122, 255, 0.15);
+    color: #0066ff;
+}
+
+.badge-red {
+    background: rgba(255, 0, 0, 0.15);
+    color: #d10037;
+}
+
+/* ===== STATUS ===== */
+
+.status-ok {
+    color: #0c8b32;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ===== LIMITANTE ===== */
+
+.limitante {
+    background: rgba(255, 0, 0, 0.07);
+}
+
+.tag-limitante {
+    background: #d10037;
+    color: white;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 10px;
+    margin-left: 6px;
+}
+
+.red {
+    color: #d10037;
+    font-weight: bold;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}

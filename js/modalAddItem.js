@@ -51,6 +51,7 @@ const modalManager = {
     resetarModal() {
         this.form.reset();
         this.ocultarCamposAdicionais();
+        document.getElementById('quantidade').setAttribute("min", "1");
         document.getElementById('categoria').classList.remove('readonly-select');
         document.getElementById('tipo').innerHTML = '<option value="">Selecione o tipo de item</option>';
         document.getElementById('tipo').disabled = true;
@@ -126,7 +127,12 @@ const modalManager = {
 
         const erro = this.validarFormulario();
         if (erro) {
-            showToast(erro, "error");
+            Swal.fire({
+                title: 'Erro!',
+                text: erro,
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
             return;
         }
 
@@ -166,7 +172,10 @@ const modalManager = {
 
         if (!categoria) return 'Selecione uma categoria';
         if (!tipo) return 'Selecione um tipo de item';
-        if (!quantidade || quantidade <= 0) return 'Informe uma quantidade válida';
+        if (!this.isUpdate) {
+            if (!quantidade || quantidade <= 0) return 'Informe uma quantidade válida';
+        };
+
 
         if ((categoria === 'roupa' || categoria === 'acessorio') &&
             !document.getElementById('tamanho').value &&
@@ -245,7 +254,9 @@ const modalManager = {
             tipo.value = dadosItem.itemName.toLowerCase();
         }, 50);
 
-        quantidade.value = dadosItem.quantity || 1;
+        quantidade.setAttribute("min", "0");
+
+        quantidade.value = dadosItem.quantity || 0;
 
         if (dadosItem.size) {
             tamanho.value = dadosItem.size.toLowerCase();

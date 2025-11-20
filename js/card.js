@@ -131,7 +131,9 @@ async function handleUpdate(id, dataItem) {
 }
 
 // Abrir Modal Exibição
-
+document.getElementById("calcular-kits").addEventListener("click", function() {
+    window.location.href = "pages/calculoestoque.html";
+});
 
 // Deletar item
 async function handleDelete(id) {
