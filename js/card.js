@@ -1,6 +1,6 @@
 async function preencherTotal() {
     const total = await apiService.buscarTotalItens();
-    document.getElementById("totalItens").value = total || 0;
+    document.getElementById("totalItens").value = total.total || 0;
     return total;
 }
 
