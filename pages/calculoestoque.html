@@ -92,7 +92,9 @@
                 <tr>
                     <td class="capitalize">Body</td>
                     <td class="center"><span class="badge badge-blue">25</span></td>
-                    <td class="center">5</td>
+                    <td class="center">
+                        <input value="5" type="number">
+                    </td>
                     <td class="center">5</td>
                     <td>
                         <span class="status-ok">
@@ -104,7 +106,7 @@
                 <tr>
                     <td class="capitalize">Macacão</td>
                     <td class="center"><span class="badge badge-blue">15</span></td>
-                    <td class="center">3</td>
+                    <td class="center"><input value="5" type="number"></td>
                     <td class="center">5</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -112,7 +114,7 @@
                 <tr>
                     <td class="capitalize">Manta</td>
                     <td class="center"><span class="badge badge-blue">10</span></td>
-                    <td class="center">2</td>
+                    <td class="center"><input value="5" type="number"></td>
                     <td class="center">5</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -123,7 +125,7 @@
                         <span class="tag-limitante">Limitante</span>
                     </td>
                     <td class="center"><span class="badge badge-red">12</span></td>
-                    <td class="center">4</td>
+                    <td class="center"><input value="5" type="number"></td>
                     <td class="center red">3</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -131,7 +133,7 @@
                 <tr>
                     <td class="capitalize">Touca</td>
                     <td class="center"><span class="badge badge-blue">8</span></td>
-                    <td class="center">2</td>
+                    <td class="center"><input value="5" type="number"></td>
                     <td class="center">4</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -139,7 +141,7 @@
                 <tr>
                     <td class="capitalize">Babador</td>
                     <td class="center"><span class="badge badge-blue">20</span></td>
-                    <td class="center">3</td>
+                    <td class="center"><input value="5" type="number"></td>
                     <td class="center">6</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -235,6 +237,42 @@
         </table>
 
     </section>
+
+    <!-- Overlay -->
+    <div id="modalOverlay" class="modal-overlay hidden"></div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 class="modal-title">Confirmar Retirada de Kit de Enxoval</h2>
+            <p class="modal-subtitle">Tem certeza que deseja retirar 1 kit completo de enxoval do estoque?</p>
+
+            <div class="gender-box">
+                <label class="gender-label">Selecione o gênero do bebê: <span>*</span></label>
+                <div class="gender-options">
+                    <label><input type="radio" name="gender"> Masculino</label>
+                    <label><input type="radio" name="gender"> Feminino</label>
+                </div>
+            </div>
+
+            <div class="items-list">
+                <p>Os seguintes itens serão subtraídos:</p>
+                <ul>
+                    <li>Body: 5 Unidade(s)</li>
+                    <li>Macacão: 3 Unidade(s)</li>
+                    <li>Manta: 2 Unidade(s)</li>
+                    <li>Meia: 4 Unidade(s)</li>
+                    <li>Touca: 2 Unidade(s)</li>
+                    <li>Babador: 3 Unidade(s)</li>
+                </ul>
+            </div>
+
+            <div class="modal-footer">
+                <button id="closeModalBtn" class="cancel-btn">Cancelar</button>
+                <button class="confirm-btn">Confirmar Retirada</button>
+            </div>
+        </div>
+    </div>
 
     <script src="/js/calculoestoque.js" defer></script>
 </body>

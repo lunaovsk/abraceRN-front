@@ -5,7 +5,7 @@ async function preencherTotal() {
 }
 
 // Buscar lista paginada
-async function carregarPagina(page = 0, size = 10) {
+async function carregarPagina(page = 0, size = 5) {
     const data = await apiService.localizarItens(page, size);
 
     preencherTabela(data); // Atualiza tabela

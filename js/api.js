@@ -78,7 +78,7 @@ const apiService = {
             }
 
             const data = await response.json();
-            return data.total;
+            return data;
 
         } catch (error) {
             console.error(error);
@@ -86,7 +86,7 @@ const apiService = {
         }
     },
 
-    async localizarItens(page = 0, size = 10) {
+    async localizarItens(page = 0, size = 5) {
         try {
             const response = await fetch(`${configAPI.baseURL}/all-items?page=${page}&size=${size}`, {
                 method: 'GET',
