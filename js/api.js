@@ -86,9 +86,30 @@ const apiService = {
         }
     },
 
-    async localizarItens(page = 0, size = 5) {
+    async localizarItens({
+        page = 0,
+        size = 5,
+        category = null,
+        itemName = null,
+        itemSize = null,
+        gender = null,
+        
+    } = {}) {
+
         try {
-            const response = await fetch(`${configAPI.baseURL}/all-items?page=${page}&size=${size}`, {
+
+            // Monta os parâmetros da URL
+            const params = new URLSearchParams();
+
+            params.append("page", page);
+            params.append("size", size);
+
+            if (category) params.append("category", category);
+            if (itemName) params.append("itemName", itemName);
+            if (itemSize) params.append("itemSize", itemSize);
+            if(gender) params.append("gender",gender);
+
+            const response = await fetch(`${configAPI.baseURL}/all-items?${params.toString()}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,15 +129,15 @@ const apiService = {
         }
     },
 
-    async atualizarItem(id,dadosItem){
+
+    async atualizarItem(id, dadosItem) {
         try {
-            const response = await fetch(`${configAPI.baseURL}/atualizar/${id}`,
-            {
+            const response = await fetch(`${configAPI.baseURL}/atualizar/${id}`, {
                 method: 'PUT',
-                headers:{
+                headers: {
                     'Content-Type': 'application/json',
                 },
-                body:JSON.stringify(dadosItem)
+                body: JSON.stringify(dadosItem)
             });
 
             return response;
@@ -124,7 +145,7 @@ const apiService = {
 
             console.log(error);
             throw error;
-            
+
         }
     },
 

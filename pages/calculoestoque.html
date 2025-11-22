@@ -75,7 +75,7 @@
             <p>Cada kit contém 6 tipos de itens essenciais para o recém-nascido</p>
         </div>
 
-        <button class="btn-retirar">− Retirar Kit Completo de Enxoval</button>
+        <button class="btn-retirar" data-kit="enxoval">− Retirar Kit Completo de Enxoval</button>
 
         <table class="tabela-kits">
             <thead>
@@ -93,7 +93,7 @@
                     <td class="capitalize">Body</td>
                     <td class="center"><span class="badge badge-blue">25</span></td>
                     <td class="center">
-                        <input value="5" type="number">
+                        <input id="body" value="5" type="number">
                     </td>
                     <td class="center">5</td>
                     <td>
@@ -106,7 +106,7 @@
                 <tr>
                     <td class="capitalize">Macacão</td>
                     <td class="center"><span class="badge badge-blue">15</span></td>
-                    <td class="center"><input value="5" type="number"></td>
+                    <td class="center"><input id="macacao" value="5" type="number"></td>
                     <td class="center">5</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -114,7 +114,7 @@
                 <tr>
                     <td class="capitalize">Manta</td>
                     <td class="center"><span class="badge badge-blue">10</span></td>
-                    <td class="center"><input value="5" type="number"></td>
+                    <td class="center"><input id="manta" value="5" type="number"></td>
                     <td class="center">5</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -125,7 +125,7 @@
                         <span class="tag-limitante">Limitante</span>
                     </td>
                     <td class="center"><span class="badge badge-red">12</span></td>
-                    <td class="center"><input value="5" type="number"></td>
+                    <td class="center"><input id="meia" value="5" type="number"></td>
                     <td class="center red">3</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -133,7 +133,7 @@
                 <tr>
                     <td class="capitalize">Touca</td>
                     <td class="center"><span class="badge badge-blue">8</span></td>
-                    <td class="center"><input value="5" type="number"></td>
+                    <td class="center"><input id="touca" value="5" type="number"></td>
                     <td class="center">4</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -141,7 +141,7 @@
                 <tr>
                     <td class="capitalize">Babador</td>
                     <td class="center"><span class="badge badge-blue">20</span></td>
-                    <td class="center"><input value="5" type="number"></td>
+                    <td class="center"><input id="babador" value="5" type="number"></td>
                     <td class="center">6</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
@@ -165,7 +165,7 @@
             <p>Cada kit contém 5 tipos de itens de cuidado e limpeza</p>
         </div>
 
-        <button class="btn-retirar higiene">− Retirar Kit Completo de Enxoval</button>
+        <button class="btn-retirar higiene" data-kit="higiene">− Retirar Kit Completo de Higiene</button>
 
         <table class="tabela-kits">
             <thead>
@@ -180,60 +180,59 @@
 
             <tbody>
                 <tr>
-                    <td class="capitalize">Body</td>
+                    <td class="capitalize">Pacote de fralda</td>
                     <td class="center"><span class="badge badge-blue">25</span></td>
-                    <td class="center">5</td>
+                    <td class="center"><input id="Pacote-de-fralda" value="5" type="number"></td>
                     <td class="center">5</td>
                     <td>
-                        <span class="status-ok">
-                            ✔ Disponível
-                        </span>
+                        <span class="status-ok">✔ Disponível</span>
                     </td>
                 </tr>
 
                 <tr>
-                    <td class="capitalize">Macacão</td>
+                    <td class="capitalize">Shampoo</td>
                     <td class="center"><span class="badge badge-blue">15</span></td>
-                    <td class="center">3</td>
+                    <td class="center"><input id="shampoo" value="3" type="number"></td>
                     <td class="center">5</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
 
                 <tr>
-                    <td class="capitalize">Manta</td>
+                    <td class="capitalize">Pomada</td>
                     <td class="center"><span class="badge badge-blue">10</span></td>
-                    <td class="center">2</td>
+                    <td class="center"><input id="pomada" value="2" type="number"></td>
                     <td class="center">5</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
 
                 <tr class="limitante">
                     <td class="capitalize">
-                        Meia
+                        Perfume
                         <span class="tag-limitante">Limitante</span>
                     </td>
                     <td class="center"><span class="badge badge-red">12</span></td>
-                    <td class="center">4</td>
+                    <td class="center"><input id="perfume" value="4" type="number"></td>
                     <td class="center red">3</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
 
                 <tr>
-                    <td class="capitalize">Touca</td>
+                    <td class="capitalize">Lenço umedecido</td>
                     <td class="center"><span class="badge badge-blue">8</span></td>
-                    <td class="center">2</td>
+                    <td class="center"><input id="lenco-Umedecido" value="2" type="number"></td>
                     <td class="center">4</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
 
                 <tr>
-                    <td class="capitalize">Babador</td>
+                    <td class="capitalize">Sabonete</td>
                     <td class="center"><span class="badge badge-blue">20</span></td>
-                    <td class="center">3</td>
+                    <td class="center"><input id="sabonete" value="3" type="number"></td>
                     <td class="center">6</td>
                     <td><span class="status-ok">✔ Disponível</span></td>
                 </tr>
             </tbody>
+
         </table>
 
     </section>

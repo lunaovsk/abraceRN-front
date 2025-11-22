@@ -44,9 +44,9 @@
                 <input type="number" name="itens-unicos" id="itensUnicos" disabled value="0">
             </div>
             <div id="calcular-kits" class="container-input container-card5">
-                <div class="container-card5-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-calculator h-4 w-4" aria-hidden="true">
+                <div class="container-card5-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-calculator h-4 w-4" aria-hidden="true">
                         <rect width="16" height="20" x="4" y="2" rx="2"></rect>
                         <line x1="8" x2="16" y1="6" y2="6"></line>
                         <line x1="16" x2="16" y1="14" y2="18"></line>
@@ -79,20 +79,10 @@
                 <div class="container-select">
                     <select id="selectCategoria" name="todas-categorias" class="container-option">
                         <option value="">Todas as categorias</option>
-                        <option value="roupa">Roupas</option>
-                        <option value="acessorio">Acessórios</option>
+                        <option value="roupa">Roupa</option>
+                        <option value="acessorio">Acessório</option>
                         <option value="higiene">Higiene</option>
                         <option value="alimentacao">Alimentação</option>
-                    </select>
-                </div>
-                <div class="container-select">
-                    <select id="selectTipo" name="" class="container-option">
-                        <option value="">Todos os tipos</option>
-                        <option value="body">Body</option>
-                        <option value="macacao">Macacão</option>
-                        <option value="manta">Manta</option>
-                        <option value="fralda de pano">Fralda de pano</option>
-                        <option value="sapato">Sapato</option>
                     </select>
                 </div>
                 <div class="container-select">
@@ -102,6 +92,14 @@
                         <option value="p">P</option>
                         <option value="m">M</option>
                         <option value="g">G</option>
+                    </select>
+                </div>
+                <div class="container-select">
+                    <select id="selectGenero" name="" class="container-option">
+                        <option value="">Todos os gêneros</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="UNISSEX">Unissex</option>
                     </select>
                 </div>
             </div>
@@ -150,10 +148,10 @@
                 <label for="categoria">Categoria</label>
                 <select id="categoria" required>
                     <option value="">Selecione a categoria</option>
-                    <option value="roupa">Roupas</option>
-                    <option value="acessorio">Acessórios</option>
-                    <option value="higiene">Higiene</option>
-                    <option value="alimentacao">Alimentação</option>
+                    <option value="ROUPA">Roupas</option>
+                    <option value="ACESSORIO">Acessórios</option>
+                    <option value="HIGIENE">Higiene</option>
+                    <option value="ALIMENTACAO">Alimentação</option>
                 </select>
 
                 <!-- Tipo -->
@@ -212,11 +210,12 @@
         </div>
     </div>
 
-    <script src="./js/config.js"></script>
-    <script src="./js/api.js"></script>
-    <script src="./js/card.js"></script>
-    <script src="./js/app.js"></script>
-    <script src="./js/modalAddItem.js"></script>
+    <script src="./js/config.js" defer></script>
+    <script src="./js/api.js" defer></script>
+    <script src="./js/card.js" defer></script>
+    <script src="./js/app.js" defer></script>
+    <script src="./js/modalAddItem.js" defer></script>
+    <script src="./js/filtro.js" defer></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
