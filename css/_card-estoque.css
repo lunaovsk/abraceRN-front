@@ -116,19 +116,27 @@
 }
 
 .mensagem-lista-vazia {
-    text-align: center;
-    font-weight: bold;
-    font-size: 16px;
-    color: #555;
-    position: relative;
-    animation: pulse 1.2s ease-in-out infinite;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: #555;
+  position: relative;
+  animation: pulse 1.2s ease-in-out infinite;
 }
 
 /* animação suave estilo Nubank */
 @keyframes pulse {
-    0% { opacity: 0.4; }
-    50% { opacity: 1; }
-    100% { opacity: 0.4; }
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
 }
 
 /* Tags (Categoria, Tamanho, Gênero, etc.) */
@@ -198,4 +206,49 @@
 .paginacao button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+
+  .card-estoque {
+    padding: 0;
+  }
+
+  .card-estoque-header {
+    padding: 18px;
+  }
+
+  .card-estoque-body {
+    padding: 0 15px 20px 15px;
+  }
+
+  .table-estoque {
+    font-size: 13px;
+  }
+
+  /* Wrapper para evitar quebra */
+  .table-estoque-wrapper {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .table-estoque {
+    min-width: 650px;
+  }
+
+  .btn-action {
+    padding: 4px;
+  }
+
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-responsive table {
+    min-width: 700px;
+    /* evita quebra */
+  }
+
 }

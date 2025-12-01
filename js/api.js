@@ -93,7 +93,7 @@ const apiService = {
         itemName = null,
         itemSize = null,
         gender = null,
-        
+
     } = {}) {
 
         try {
@@ -107,7 +107,7 @@ const apiService = {
             if (category) params.append("category", category);
             if (itemName) params.append("itemName", itemName);
             if (itemSize) params.append("itemSize", itemSize);
-            if(gender) params.append("gender",gender);
+            if (gender) params.append("gender", gender);
 
             const response = await fetch(`${configAPI.baseURL}/all-items?${params.toString()}`, {
                 method: 'GET',
@@ -165,5 +165,6 @@ const apiService = {
             return false; // falha
         }
     },
+
 
 };

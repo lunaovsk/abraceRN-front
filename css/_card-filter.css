@@ -74,3 +74,27 @@ input:focus {
     user-select: auto;
 }
 
+@media (max-width: 768px) {
+
+    .container-filter {
+        height: auto;
+        padding: 18px;
+        gap: 14px;
+    }
+
+    .container-filter-select {
+        flex-direction: column;
+        gap: 16px;
+        padding: 0;
+    }
+
+    .container-select {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .container-filter-input {
+        width: 100%;
+        font-size: 16px;
+    }
+}
