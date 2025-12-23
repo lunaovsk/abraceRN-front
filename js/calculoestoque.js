@@ -1,6 +1,6 @@
 // Voltar para página inicial
 document.querySelector(".back-btn").addEventListener("click", function () {
-    window.location.href = "/";
+    window.location.href = "../index.html";
 });
 
 // Seletores principais
