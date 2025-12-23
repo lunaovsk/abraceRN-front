@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
-@import url(./_header.css);
-@import url(./_cards.css);
-@import url(./_card-filter.css);
-@import url(./_card-estoque.css);
-@import url(./_modal-add-item.css);
+@import url("./header.css");
+@import url("./cards.css");
+@import url("./card-filter.css");
+@import url("./card-estoque.css");
+@import url("./modal-add-item.css");
 
 * {
     margin: 0;
