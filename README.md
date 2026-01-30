@@ -1,25 +1,25 @@
-# 🍼 Abrace um RN – Dashboard Administrativo
+# Abrace um RN – Dashboard Administrativo
 
 Este projeto é um **Dashboard Administrativo** para o gerenciamento de itens do estoque de doações do projeto **Abrace um RN**.  
 A aplicação permite **adicionar, visualizar, filtrar e organizar itens** por categoria, tipo, tamanho, gênero e validade.
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 | Função | Descrição |
 |-------|-----------|
-| ➕ Adicionar item | Modal para cadastro de novos itens |
-| 📦 Controle de estoque | Visualização detalhada dos itens cadastrados |
-| 🔍 Filtros e pesquisa | Pesquisa por nome, categoria, tipo e tamanho |
-| 📊 Indicadores automáticos | Total de itens, tipos cadastrados, categorias e itens únicos |
-| ✅ Validações no formulário | Verifica preenchimento correto antes do envio |
-| 🔔 Toast Notifications | Sucesso e erro com **Toastify.js** |
-| 🔄 Atualização em tempo real | A lista e os totais são atualizados após cada operação |
+| Adicionar item | Modal para cadastro de novos itens |
+| Controle de estoque | Visualização detalhada dos itens cadastrados |
+| Filtros e pesquisa | Pesquisa por nome, categoria, tipo e tamanho |
+| Indicadores automáticos | Total de itens, tipos cadastrados, categorias e itens únicos |
+| Validações no formulário | Verifica preenchimento correto antes do envio |
+| Toast Notifications | Sucesso e erro com **Toastify.js** |
+| Atualização em tempo real | A lista e os totais são atualizados após cada operação |
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 | Tecnologia | Uso |
 |-----------|-----|
@@ -33,7 +33,7 @@ A aplicação permite **adicionar, visualizar, filtrar e organizar itens** por c
 
 ---
 
-## 📂 Estrutura de Pastas
+## Estrutura de Pastas
 ```
 .
 ├── css/
@@ -57,15 +57,15 @@ A aplicação permite **adicionar, visualizar, filtrar e organizar itens** por c
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
-### 1️⃣ Clonar o repositório
+### Clonar o repositório
 ```bash
 git clone https://github.com/SEU-USUARIO/abrace-rn-dashboard.git
 cd abrace-rn-dashboard
 ```
 
-### 2️⃣ Iniciar o projeto
+### Iniciar o projeto
 A aplicação é **frontend puro**, então só abrir o arquivo:
 **html**
 ```
@@ -74,7 +74,7 @@ index.html
  **Dica:**  Use uma extensão como **Live Server** no VS Code para auto-reload.
 
 ---
-### 🔌 Configuração de API (Opcional)
+### Configuração de API (Opcional)
 No arquivo:
 **js**
 ```
@@ -89,7 +89,7 @@ const BASE_URL = "http://localhost:8080/api";
 
 ---
 
-### 🧑‍💻 Desenvolvimento
+### Desenvolvimento
 Notificações com Toastify
 
 **html**
@@ -103,12 +103,11 @@ Função utilizada:
 ```js
 showToast("Mensagem aqui", "success"); // success | error | info
 ```
-### 📸 Preview 
+### Preview 
 
 ---
 
-### 🤝 Contribuindo
-Contribuições são bem-vindas!
+### Contribuindo
 Para contribuir:
 
 **git**
@@ -117,16 +116,15 @@ git branch minha-melhoria
 git commit -m "Melhoria: descrição"
 git push origin minha-melhoria
 ``` 
-E abra um **Pull Request** 😉
+E abra um **Pull Request**
 
 ---
 
-### 📄 Licença
+### Licença
 Este projeto é de uso interno do projeto **Abrace um RN**
 Permissão de uso, modificação e distribuição deve ser autorizada.
 
 ---
-Feito com ❤️ para apoiar famílias e recém-nascidos 🤱
 
 
 
