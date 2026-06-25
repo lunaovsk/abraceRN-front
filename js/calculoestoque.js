@@ -1,3 +1,6 @@
+// Bloqueia o acesso à página caso não exista sessão válida
+auth.protegerPagina();
+
 // Voltar para página inicial
 document.querySelector(".back-btn").addEventListener("click", function () {
     window.location.href = "../index.html";
@@ -6,12 +9,16 @@ document.querySelector(".back-btn").addEventListener("click", function () {
 // Seletores principais
 const openButtons = document.querySelectorAll(".btn-retirar");
 const closeBtn = document.getElementById("closeModalBtn");
+const confirmBtn = document.querySelector(".confirm-btn");
 const modal = document.getElementById("modal");
 const overlay = document.getElementById("modalOverlay");
 const title = document.querySelector(".modal-title");
 const subtitle = document.querySelector(".modal-subtitle");
 const itemsList = document.querySelector(".items-list ul");
 const inputs = document.querySelectorAll(".tabela-kits input");
+
+// Tipo de kit que está sendo retirado no momento ("enxoval" ou "higiene")
+let kitSelecionado = null;
 
 // Dados dos kits 
 const kits = {
@@ -45,6 +52,8 @@ const kits = {
 
 // Função para abrir modal com base no tipo
 function abrirModal(tipo) {
+
+    kitSelecionado = tipo;
 
     // itens dinamicamente quando abrir o modal
     if (tipo === "enxoval") {
@@ -94,14 +103,53 @@ function recalcularKits() {
         const estoque = Number(linha.querySelector(".badge").textContent);
         const inputNecessario = Number(linha.querySelector("input").value);
         const campoKits = linha.children[3];
+        const campoStatus = linha.children[4];
 
         if (inputNecessario > 0) {
             const kitsPossiveis = Math.floor(estoque / inputNecessario);
             campoKits.textContent = kitsPossiveis;
+            campoStatus.innerHTML = kitsPossiveis > 0
+                ? `<span class="status-ok">✔ Disponível</span>`
+                : `<span class="status-off">✖ Sem estoque</span>`;
         } else {
             campoKits.textContent = "-";
+            campoStatus.innerHTML = "";
         }
     });
+}
+
+// Fecha o modal
+function fecharModal() {
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
+}
+
+// Confirma a retirada do kit chamando a API (PUT /kit/gerar-kits).
+// O gênero/tamanho de cada item já vêm dos selects da linha (montarBodyKit).
+async function confirmarRetirada() {
+    if (!kitSelecionado) return;
+
+    const body = kitSelecionado === "enxoval" ? montarBodyEnxoval() : montarBodyHigiene();
+
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = "Processando...";
+
+    try {
+        const sucesso = await gerarKit(body);
+        if (!sucesso) return;
+
+        fecharModal();
+        showToast("success", "Kit retirado! Itens descontados do estoque.");
+
+        // Recarrega o estoque real (descontado) e os cálculos
+        await atualizarEstoque();
+        await preencherTotalEnxoval();
+        await preencherTotalHigiene();
+
+    } finally {
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = "Confirmar Retirada";
+    }
 }
 
 //EVENTS
@@ -115,16 +163,13 @@ openButtons.forEach(btn => {
 });
 
 // Fechar modal no botão "Cancelar"
-closeBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-    overlay.classList.add("hidden");
-});
+closeBtn.addEventListener("click", fecharModal);
 
 // Fechar clicando fora (overlay)
-overlay.addEventListener("click", () => {
-    modal.classList.add("hidden");
-    overlay.classList.add("hidden");
-});
+overlay.addEventListener("click", fecharModal);
+
+// Confirmar a retirada do kit
+confirmBtn.addEventListener("click", confirmarRetirada);
 
 // Ação aos inputs
 inputs.forEach(input => {

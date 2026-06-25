@@ -62,3 +62,45 @@ header {
     cursor: pointer;
     background: linear-gradient(to right, #2563EB, #7E22CE);
 }
+
+.container-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.container-user {
+    font-size: 14px;
+    color: #4A5565;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.container-logout {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 14px;
+    background-color: #ffffff;
+    color: #4A5565;
+    font-size: 14px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.container-logout:hover {
+    background-color: #F3F3F5;
+    color: #DC2626;
+}
+
+@media (max-width: 768px) {
+    .container-user {
+        display: none;
+    }
+}

@@ -36,6 +36,14 @@ function preencherTabela(lista) {
         // Atribuindo um id único usando o id do item
         tr.id = `row-${item.id}`;
 
+        // As ações ficam sempre visíveis; o back-end autoriza (ou nega com 403)
+        const acoes = `<button class="btn-action" onclick='handleUpdate(${item.id},${JSON.stringify(item)})'>
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="btn-action trash" onclick="handleDelete(${item.id})">
+                    <i class="fa-solid fa-trash"></i>
+                </button>`;
+
         tr.innerHTML = `
             <td><span>${item.itemName || "N/A"}</span></td>
             <td><span class="tag">${item.type || "N/A"}</span></td>
@@ -49,14 +57,7 @@ function preencherTabela(lista) {
             }</td>
             <td><span class="quantidade-badge">${item.quantity || 0}</span></td>
             <td><span>${item.createdAt ? formatarData(item.createdAt) : "N/A"}</span></td>
-            <td class="actions">
-                <button class="btn-action" onclick='handleUpdate(${item.id},${JSON.stringify(item)})'>
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-                <button class="btn-action trash" onclick="handleDelete(${item.id})">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </td>`;
+            <td class="actions">${acoes}</td>`;
 
         tbody.appendChild(tr);
     });
@@ -104,15 +105,8 @@ async function handleUpdate(id, dataItem) {
 
         const response = await apiService.atualizarItem(id, dataItem);
 
-        if (!response) { // 3) Erro
-            Swal.fire({
-                title: 'Erro!',
-                text: 'Não foi possível atualizar o item.',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
-            return;
-        }
+        // Resposta vazia = acesso negado (401/403) já comunicado por auth.tratarAcessoNegado
+        if (!response) return;
 
         console.log(response);
 
@@ -120,12 +114,7 @@ async function handleUpdate(id, dataItem) {
     } catch (erro) {
         console.error(erro);
 
-        Swal.fire({
-            title: 'Erro!',
-            text: 'Não foi possível atualizar o item.',
-            icon: 'error',
-            confirmButtonText: 'Ok'
-        });
+        showToast('error', 'Não foi possível atualizar o item.');
     }
 
 }
@@ -151,37 +140,24 @@ async function handleDelete(id) {
 
         // Se o usuário cancelar, sai da função
         if (!result.isConfirmed) {
-            Swal.fire({
-                title: 'Cancelado exclução!',
-                text: 'Não foi excluido o item.',
-                icon: 'info',
-                confirmButtonText: 'Ok'
-            });
-
+            showToast('info', 'Exclusão cancelada.');
             return;
         }
 
         // Agora sim, deletar
         const resp = await apiService.deleteItem(id);
 
+        // undefined = acesso negado (401/403) já comunicado por auth.tratarAcessoNegado
+        if (resp === undefined) return;
+
         if (!resp) {
             // 3) Erro
-            Swal.fire({
-                title: 'Erro!',
-                text: 'Não foi possível excluir o item.',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
+            showToast('error', 'Não foi possível excluir o item.');
             return;
         }
 
         // 2) Sucesso
-        await Swal.fire({
-            title: 'Excluido!',
-            text: 'O item foi excluido com sucesso.',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
+        showToast('success', 'Item excluído com sucesso!');
 
         // Recarregar mantendo paginação
         const paginaAtual = document.querySelector("#paginacao span")
@@ -193,11 +169,6 @@ async function handleDelete(id) {
     } catch (error) {
         console.error(error);
         // 3) Erro
-        Swal.fire({
-            title: 'Erro!',
-            text: 'Não foi possível excluir o item.',
-            icon: 'error',
-            confirmButtonText: 'Ok'
-        });
+        showToast('error', 'Não foi possível excluir o item.');
     }
 }

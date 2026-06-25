@@ -21,12 +21,7 @@ const modalManager = {
         });
 
         this.closeModal.addEventListener('click', () => {
-            Swal.fire({
-                title: 'Cancelado!',
-                text: 'Operação cancelada.',
-                icon: 'info',
-                confirmButtonText: 'Ok'
-            });
+            showToast('info', 'Operação cancelada.');
             this.fecharModal()
         });
 
@@ -127,12 +122,7 @@ const modalManager = {
 
         const erro = this.validarFormulario();
         if (erro) {
-            Swal.fire({
-                title: 'Erro!',
-                text: erro,
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
+            showToast('error', erro);
             return;
         }
 
@@ -141,12 +131,7 @@ const modalManager = {
 
             if (this.isUpdate && this.currentItemId) {
                 await apiService.atualizarItem(this.currentItemId, dados);
-                await Swal.fire({
-                    title: 'Atualizado!',
-                    text: 'O item foi atualizado com sucesso.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
+                showToast('success', 'Item atualizado com sucesso!');
             } else {
                 await apiService.cadastrarItem(dados);
             }
@@ -156,12 +141,7 @@ const modalManager = {
 
         } catch (error) {
             console.log(error);
-            Swal.fire({
-                title: 'Erro!',
-                text: 'Erro ao processar item',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
+            showToast('error', 'Erro ao processar item.');
         }
     },
 

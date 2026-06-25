@@ -1,7 +1,23 @@
+// Bloqueia o acesso ao dashboard caso não exista sessão válida
+auth.protegerPagina();
+
 const app = {
     async inicializar() {
+        // Sem sessão válida não há o que carregar (a guarda já redirecionou)
+        if (!auth.estaAutenticado()) return;
+
+        this.configurarSessao();
         await this.carregarTotais();
         await this.carregarItens(0, 5); // Carrega a tabela ao entrar
+    },
+
+    // Exibe o usuário logado e habilita o botão de sair
+    configurarSessao() {
+        const usuarioEl = document.getElementById("usuarioLogado");
+        if (usuarioEl) usuarioEl.textContent = auth.getUsuario() || "";
+
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) logoutBtn.addEventListener("click", () => auth.logout());
     },
 
     async carregarTotais() {

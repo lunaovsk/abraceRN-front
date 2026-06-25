@@ -42,21 +42,21 @@
 
     <section class="cards">
         <div class="card blue">
-            <h3>📦 Kits de Enxoval Possíveis</h3>
+            <h3>Kits de Enxoval Possíveis</h3>
             <h1 id="card_enxoval"></h1>
             <p>kits completos</p>
         </div>
 
         <div class="card purple">
-            <h3>🧴 Kits de Higiene Possíveis</h3>
+            <h3>Kits de Higiene Possíveis</h3>
             <h1 id="card_higiene"></h1>
             <p>kits completos</p>
         </div>
 
         <div class="card orange">
-            <h3>⚠ Itens Limitantes</h3>
-            <p><b>Enxoval:</b> Meia</p>
-            <p><b>Higiene:</b> Fralda Descartável</p>
+            <h3>Itens Limitantes</h3>
+            <p><b>Enxoval:</b> <span id="limitantes_enxoval">—</span></p>
+            <p><b>Higiene:</b> <span id="limitantes_higiene">—</span></p>
         </div>
     </section>
 
@@ -77,7 +77,7 @@
 
         <button class="btn-retirar" data-kit="enxoval">− Retirar Kit Completo de Enxoval</button>
 
-        <table class="tabela-kits">
+        <table class="tabela-kits" data-kit="enxoval">
             <thead>
                 <tr>
                     <th>Item</th>
@@ -91,59 +91,50 @@
             <tbody>
                 <tr>
                     <td class="capitalize">Body</td>
-                    <td class="center"><span class="badge badge-blue">25</span></td>
-                    <td class="center">
-                        <input id="body" value="5" type="number">
-                    </td>
-                    <td class="center">5</td>
-                    <td>
-                        <span class="status-ok">
-                            ✔ Disponível
-                        </span>
-                    </td>
+                    <td class="center"><span class="badge"></span></td>
+                    <td class="center"><input id="body" value="5" type="number"></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
                 <tr>
                     <td class="capitalize">Macacão</td>
-                    <td class="center"><span class="badge badge-blue">15</span></td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="macacao" value="5" type="number"></td>
-                    <td class="center">5</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
                 <tr>
                     <td class="capitalize">Manta</td>
-                    <td class="center"><span class="badge badge-blue">10</span></td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="manta" value="5" type="number"></td>
-                    <td class="center">5</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
-                <tr class="limitante">
-                    <td class="capitalize">
-                        Meia
-                        <span class="tag-limitante">Limitante</span>
-                    </td>
-                    <td class="center"><span class="badge badge-red">12</span></td>
+                <tr>
+                    <td class="capitalize">Meia</td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="meia" value="5" type="number"></td>
-                    <td class="center red">3</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
                 <tr>
                     <td class="capitalize">Touca</td>
-                    <td class="center"><span class="badge badge-blue">8</span></td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="touca" value="5" type="number"></td>
-                    <td class="center">4</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
                 <tr>
                     <td class="capitalize">Babador</td>
-                    <td class="center"><span class="badge badge-blue">20</span></td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="babador" value="5" type="number"></td>
-                    <td class="center">6</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
             </tbody>
         </table>
@@ -167,7 +158,7 @@
 
         <button class="btn-retirar higiene" data-kit="higiene">− Retirar Kit Completo de Higiene</button>
 
-        <table class="tabela-kits">
+        <table class="tabela-kits" data-kit="higiene">
             <thead>
                 <tr>
                     <th>Item</th>
@@ -181,55 +172,50 @@
             <tbody>
                 <tr>
                     <td class="capitalize">Pacote de fralda</td>
-                    <td class="center"><span class="badge badge-blue">25</span></td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="Pacote-de-fralda" value="5" type="number"></td>
-                    <td class="center">5</td>
-                    <td>
-                        <span class="status-ok">✔ Disponível</span>
-                    </td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
                 <tr>
                     <td class="capitalize">Shampoo</td>
-                    <td class="center"><span class="badge badge-blue">15</span></td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="shampoo" value="3" type="number"></td>
-                    <td class="center">5</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
                 <tr>
                     <td class="capitalize">Pomada</td>
-                    <td class="center"><span class="badge badge-blue">10</span></td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="pomada" value="2" type="number"></td>
-                    <td class="center">5</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
-                <tr class="limitante">
-                    <td class="capitalize">
-                        Perfume
-                        <span class="tag-limitante">Limitante</span>
-                    </td>
-                    <td class="center"><span class="badge badge-red">12</span></td>
+                <tr>
+                    <td class="capitalize">Perfume</td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="perfume" value="4" type="number"></td>
-                    <td class="center red">3</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
                 <tr>
                     <td class="capitalize">Lenço umedecido</td>
-                    <td class="center"><span class="badge badge-blue">8</span></td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="lenco-Umedecido" value="2" type="number"></td>
-                    <td class="center">4</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
 
                 <tr>
                     <td class="capitalize">Sabonete</td>
-                    <td class="center"><span class="badge badge-blue">20</span></td>
+                    <td class="center"><span class="badge"></span></td>
                     <td class="center"><input id="sabonete" value="3" type="number"></td>
-                    <td class="center">6</td>
-                    <td><span class="status-ok">✔ Disponível</span></td>
+                    <td class="center"></td>
+                    <td class="status"></td>
                 </tr>
             </tbody>
 
@@ -245,14 +231,6 @@
         <div class="modal-content">
             <h2 class="modal-title">Confirmar Retirada de Kit de Enxoval</h2>
             <p class="modal-subtitle">Tem certeza que deseja retirar 1 kit completo de enxoval do estoque?</p>
-
-            <div class="gender-box">
-                <label class="gender-label">Selecione o gênero do bebê: <span>*</span></label>
-                <div class="gender-options">
-                    <label><input type="radio" name="gender"> Masculino</label>
-                    <label><input type="radio" name="gender"> Feminino</label>
-                </div>
-            </div>
 
             <div class="items-list">
                 <p>Os seguintes itens serão subtraídos:</p>
@@ -274,8 +252,10 @@
     </div>
 
     <script src="../js/config.js" defer></script>
+    <script src="../js/auth.js" defer></script>
     <script src="../js/calculoestoque.js" defer></script>
-    <script src="../js/calculokits.js" defer></script>
+    <script src="../js/calculoKits.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

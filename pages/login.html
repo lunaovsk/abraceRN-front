@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login • Abrace um RN</title>
+    <link rel="shortcut icon" href="../img/Container.png">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <main class="login-wrapper">
+        <form id="loginForm" class="login-card" novalidate>
+            <div class="login-logo">
+                <img src="../img/Container.png" alt="Logo de um coração">
+                <div class="login-titles">
+                    <h1>Abrace um RN</h1>
+                    <p>Dashboard Administrativo</p>
+                </div>
+            </div>
+
+            <h2 class="login-heading">Entrar</h2>
+            <p class="login-subheading">Informe suas credenciais para acessar o estoque.</p>
+
+            <label for="username">Usuário</label>
+            <div class="login-field">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="username" name="username" placeholder="seu@email.com"
+                    autocomplete="username" required>
+            </div>
+
+            <label for="password">Senha</label>
+            <div class="login-field">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="••••••••"
+                    autocomplete="current-password" required>
+                <button type="button" class="toggle-senha" id="toggleSenha" aria-label="Mostrar senha">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">Entrar</button>
+        </form>
+    </main>
+
+    <script src="../js/config.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/login.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

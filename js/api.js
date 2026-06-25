@@ -14,23 +14,18 @@ const apiService = {
 
         // Se o usuário cancelar, sai da função
         if (!result.isConfirmed) {
-            Swal.fire({
-                title: 'Cancelado cadastro!',
-                text: 'Não foi cadastrado o item.',
-                icon: 'info',
-                confirmButtonText: 'Ok'
-            });
+            showToast('info', 'Cadastro cancelado.');
             return;
         }
 
         try {
             const response = await fetch(`${configAPI.baseURL}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: auth.headers(),
                 body: JSON.stringify(dadosItem)
             });
+
+            if (auth.tratarAcessoNegado(response)) return;
 
             if (!response.ok) {
                 throw new Error('Erro ao cadastrar item');
@@ -39,24 +34,14 @@ const apiService = {
             modalManager.fecharModal();
 
             // 2) Sucesso
-            await Swal.fire({
-                title: 'Cadastrado!',
-                text: 'O item foi cadastrado com sucesso.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
+            showToast('success', 'Item cadastrado com sucesso!');
 
             return response;
 
         } catch (error) {
 
             // 3) Erro
-            Swal.fire({
-                title: 'Erro!',
-                text: 'Não foi possível cadastrar o item.',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
+            showToast('error', 'Não foi possível cadastrar o item.');
 
             modalManager.fecharModal();
             throw error;
@@ -68,10 +53,10 @@ const apiService = {
         try {
             const response = await fetch(`${configAPI.baseURL}/total`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+                headers: auth.headers()
             });
+
+            if (auth.tratarAcessoNegado(response)) return;
 
             if (!response.ok) {
                 throw new Error('Erro ao buscar total de itens');
@@ -111,10 +96,10 @@ const apiService = {
 
             const response = await fetch(`${configAPI.baseURL}/all-items?${params.toString()}`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+                headers: auth.headers()
             });
+
+            if (auth.tratarAcessoNegado(response)) return;
 
             if (!response.ok) {
                 throw new Error('Erro ao localizar os itens');
@@ -132,13 +117,13 @@ const apiService = {
 
     async atualizarItem(id, dadosItem) {
         try {
-            const response = await fetch(`${configAPI.baseURL}/atualizar/${id}`, {
+            const response = await fetch(`${configAPI.baseURL}/admin/atualizar/${id}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: auth.headers(),
                 body: JSON.stringify(dadosItem)
             });
+
+            if (auth.tratarAcessoNegado(response)) return;
 
             return response;
         } catch (error) {
@@ -151,9 +136,12 @@ const apiService = {
 
     async deleteItem(id) {
         try {
-            const res = await fetch(`${configAPI.baseURL}/deletar/${id}`, {
+            const res = await fetch(`${configAPI.baseURL}/admin/deletar/${id}`, {
                 method: 'DELETE',
+                headers: auth.headers()
             });
+
+            if (auth.tratarAcessoNegado(res)) return; // acesso negado já tratado
 
             if (!res.ok) {
                 throw new Error('Erro ao deletar item');
